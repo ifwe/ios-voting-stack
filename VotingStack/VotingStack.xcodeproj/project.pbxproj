@@ -23,6 +23,7 @@
 		7C688FD41884C64F006B576D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C688FD21884C64F006B576D /* InfoPlist.strings */; };
 		7C688FD61884C64F006B576D /* VotingStackTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C688FD51884C64F006B576D /* VotingStackTests.m */; };
 		7C688FE21884C977006B576D /* VSContainerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C688FE11884C977006B576D /* VSContainerView.m */; };
+		EE946407188500E70072D96C /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EE946406188500E70072D96C /* QuartzCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +59,7 @@
 		7C688FD51884C64F006B576D /* VotingStackTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = VotingStackTests.m; sourceTree = "<group>"; };
 		7C688FE01884C977006B576D /* VSContainerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VSContainerView.h; sourceTree = "<group>"; };
 		7C688FE11884C977006B576D /* VSContainerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VSContainerView.m; sourceTree = "<group>"; };
+		EE946406188500E70072D96C /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EE946407188500E70072D96C /* QuartzCore.framework in Frameworks */,
 				7C688FAA1884C64F006B576D /* CoreGraphics.framework in Frameworks */,
 				7C688FAC1884C64F006B576D /* UIKit.framework in Frameworks */,
 				7C688FA81884C64F006B576D /* Foundation.framework in Frameworks */,
@@ -107,6 +110,7 @@
 		7C688FA61884C64F006B576D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EE946406188500E70072D96C /* QuartzCore.framework */,
 				7C688FA71884C64F006B576D /* Foundation.framework */,
 				7C688FA91884C64F006B576D /* CoreGraphics.framework */,
 				7C688FAB1884C64F006B576D /* UIKit.framework */,
@@ -492,6 +496,7 @@
 				7C688FDB1884C64F006B576D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7C688FDC1884C64F006B576D /* Build configuration list for PBXNativeTarget "VotingStackTests" */ = {
 			isa = XCConfigurationList;
@@ -500,6 +505,7 @@
 				7C688FDE1884C64F006B576D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
