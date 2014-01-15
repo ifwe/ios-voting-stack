@@ -26,7 +26,7 @@
     // Dispose of any resources that can be recreated.
 }
 - (IBAction)stepForward:(id)sender {
-//    [self.voteView stepForward];
+    [self.voteView stepForward];
 }
 
 @end
