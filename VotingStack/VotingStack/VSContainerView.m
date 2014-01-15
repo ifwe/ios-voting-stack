@@ -19,6 +19,7 @@
 @interface VSContainerView ()
 
 @property (nonatomic, weak) UIView *contenterView;
+@property (nonatomic) NSUInteger startingIndex;
 
 
 @end
@@ -31,9 +32,24 @@
     self = [super initWithFrame:frame];
     if (self) {
         // Initialization code
+        [self setup];
     }
     return self;
 }
+
+- (void) setup
+{
+    self.startingIndex = 0;
+    UIView *contentView = [[UIView alloc] init];
+    for (int idx = _startingIndex; idx < _startingIndex + 5; idx++) {
+        [contentView addSubview:[self layoutItemView:idx]];
+    }
+    [self addSubview:contentView];
+    self.contenterView = contentView;
+}
+
+#pragma mark - getter & setter
+
 
 
 
@@ -42,6 +58,11 @@
 
 - (void) layoutSubviews
 {
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        [self setup];
+    });
+    
     [super layoutSubviews];
     self.contenterView.bounds = self.bounds;
     [self layOutItemViews];
@@ -49,36 +70,36 @@
 
 - (void) layOutItemViews
 {
-    UIView *contentView = [[UIView alloc] init];
-    [@[@(0), @(1), @(2)] enumerateObjectsUsingBlock:^(NSNumber *obj, NSUInteger idx, BOOL *stop) {
-        [contentView addSubview:[self layoutItemView:idx]];
-    }];
-    [self addSubview:contentView];
-    self.contenterView = contentView;
 }
 
 - (UIView *) layoutItemView:(NSUInteger)idx
 {
-    UIView * view = [[UIView alloc] init];
+    UIView * view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img"]]; //[[UIView alloc] init];
     view.frame = CGRectMake(10.0f, 10.0f , 100.0f, 150.0f);
     
     CATransform3D identity = CATransform3DIdentity;
-    identity.m34 = 1.0/ -1000;
-    CATransform3D rotated = CATransform3DRotate(identity, idx * RADIANS(20), 1, 0, 0);
-    CATransform3D translateAndRoate = CATransform3DTranslate(rotated, idx * 100, idx * 30, idx * 10);
+    // TODO: Set the correct projection matrix
+    identity.m34 = 1.0/ -2000;
+//    CATransform3D rotated = CATransform3DRotate(identity, idx * RADIANS(-20), 1, 0, 0);
+    CATransform3D translate = CATransform3DTranslate(identity, 0, idx * 5.0f, idx*-100.0f);
     
-    view.layer.transform = translateAndRoate;
+    view.layer.transform = translate;
     
-    view.backgroundColor = [UIColor redColor];
     return view;
 }
 
 
 
+#pragma mark - View Actions
 
 
-
-
+- (void) stepForward
+{
+    self.startingIndex++;
+    [UIView animateWithDuration:100 animations:^{
+        [self layOutItemViews];
+    }];
+}
 
 
 

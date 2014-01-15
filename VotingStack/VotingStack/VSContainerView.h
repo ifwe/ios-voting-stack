@@ -11,4 +11,6 @@
 
 @interface VSContainerView : UIView
 
+- (void) stepForward;
+
 @end
