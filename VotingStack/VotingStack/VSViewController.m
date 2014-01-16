@@ -17,6 +17,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.voteView.dataSource = self;
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -25,8 +26,18 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (IBAction)stepForward:(id)sender {
     [self.voteView stepForward];
+}
+
+#pragma mark - VotingStackViewDataSource
+
+
+- (UIView *) VotingStackView: (VotingStackView *) vsView viewForItemAtIndex: (NSInteger) index
+{
+    NSString *imgName = [NSString stringWithFormat:@"img %d", index];
+    return [[UIImageView alloc] initWithImage:[UIImage imageNamed:imgName]];
 }
 
 @end

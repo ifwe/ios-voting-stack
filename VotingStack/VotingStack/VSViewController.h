@@ -7,9 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "VSContainerView.h"
+#import "VotingStackView.h"
 
-@interface VSViewController : UIViewController
-@property (weak, nonatomic) IBOutlet VSContainerView *voteView;
+@interface VSViewController : UIViewController <VotingStackViewDataSource>
+@property (weak, nonatomic) IBOutlet VotingStackView *voteView;
 
 @end

@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Tagged. All rights reserved.
 //
 
-#import "VSContainerView.h"
+#import "VotingStackView.h"
 
 
 
@@ -16,7 +16,7 @@
 
 
 
-@interface VSContainerView ()
+@interface VotingStackView ()
 
 @property (nonatomic, weak) UIView *contenterView;
 @property (nonatomic) NSInteger startingIndex;
@@ -26,7 +26,7 @@
 @end
 
 
-@implementation VSContainerView
+@implementation VotingStackView
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -55,11 +55,12 @@
     self.contenterView.frame = rect;
     
     // the subviews
+    __weak VotingStackView *weakSelf = self;
     for (NSInteger idx = self.startingIndex;
          idx < (self.startingIndex + (NSInteger)self.numberOfViewVisable);
          idx++) {
         
-        UIView *view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img"]];
+        UIView *view = [self.dataSource VotingStackView:weakSelf viewForItemAtIndex:idx];
         
         view.frame = CGRectMake(10.0f, 10.0f, 100.0f, 150.0f);
         CATransform3D idenitiy = CATransform3DIdentity;
@@ -136,7 +137,6 @@
         
     }];
 }
-
 
 
 
