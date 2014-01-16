@@ -22,6 +22,14 @@
 @property (nonatomic) NSInteger startingIndex;
 @property (nonatomic) NSUInteger numberOfViewVisable;
 
+typedef enum{
+    votingStackItemView,
+} votingStack;
+
+typedef enum{
+    votingStackPresetKeyFrameOffStageEntrance,
+    votingStackPresetKeyFrameAtPosition,
+} votingStackPresetKeyFrame;
 
 @end
 
@@ -41,8 +49,8 @@
 - (void) setup
 {
     // setup basic index numbers
-    self.startingIndex = -1;
-    self.numberOfViewVisable = 5;
+    self.startingIndex = 0;
+    self.numberOfViewVisable = 12;
     
     // setup views
     // the container view
@@ -60,22 +68,23 @@
          idx < (self.startingIndex + (NSInteger)self.numberOfViewVisable);
          idx++) {
         
-        UIView *dataView = [self.dataSource VotingStackView:weakSelf viewForItemAtIndex:idx];
-        CGRect dataViewRect = dataView.frame;
-        dataViewRect.origin = CGPointMake(0, 0);
+        UIView *itemView = [self.dataSource VotingStackView:weakSelf viewForItemAtIndex:idx];
+        CGRect dataViewRect = itemView.frame;
+        dataViewRect.origin = CGPointMake(50, 50);
         dataViewRect.size = CGSizeMake(100.0f, 150.0f);
-        dataView.frame = dataViewRect;
-        
-        dataViewRect.origin = CGPointMake(10.0f, 10.0f);
-        UIView *itemContainerView = [[UIView alloc] initWithFrame:dataViewRect];
-        [itemContainerView addSubview:dataView];
+        itemView.frame = dataViewRect;
+//
+//        dataViewRect.origin = CGPointMake(10.0f, 10.0f);
+//        UIView *itemContainerView = [[UIView alloc] initWithFrame:dataViewRect];
+//        [itemContainerView addSubview:dataView];
         
         CATransform3D idenitiy = CATransform3DIdentity;
         idenitiy.m34 = 1.0/ -2000;
         
-        itemContainerView.layer.transform = idenitiy;
-        itemContainerView.layer.transform = [self stepTransformationForView:itemContainerView andIndex:idx];
-        [contentView addSubview:itemContainerView];
+        itemView.layer.transform = idenitiy;
+//        itemView.layer.transform = [self stepTransformationForView:itemView andIndex:idx];
+        
+        [contentView addSubview:itemView];
     }
     
 }
@@ -98,68 +107,106 @@
     dispatch_once(&onceToken, ^{
         [self setup];
     });
-    [self layOutItemViews];
+    [self layOutItemViewsAnimated:NO];
 }
 
-- (void) layOutItemViews
+- (void) layOutItemViewsAnimated: (BOOL) animated
 {
     [self.contenterView.subviews enumerateObjectsUsingBlock:^(UIView *view, NSUInteger idx, BOOL *stop) {
-        [self layoutItemView:view andIndex:(self.startingIndex + idx)];
+        [self layoutItemView:view andIndex:(self.startingIndex + idx) animated:animated];
     }];
 }
 
-- (UIView *) layoutItemView: (UIView *)view andIndex:(NSInteger)idx
+- (UIView *) layoutItemView: (UIView *)view andIndex:(NSInteger)idx animated:(BOOL) animated
 {
-    CABasicAnimation *transformAnimation = [CABasicAnimation animationWithKeyPath: @"transform"];
+    CABasicAnimation *transformAnimation = [self animationForViewType:votingStackItemView
+                                                         fromKeyFrame:votingStackPresetKeyFrameAtPosition
+                                                           toKeyFrame:votingStackPresetKeyFrameAtPosition
+                                                              atIndex:idx ];
     
-    CATransform3D translateFrom = [self stepTransformationForView:view andIndex:idx+1];
-    CATransform3D translateTo = [self stepTransformationForView:view andIndex:idx];
+    if (animated) {
+        [view.layer addAnimation:transformAnimation forKey:@"transform"];
+    } else {
+        view.layer.transform = [transformAnimation.toValue CATransform3DValue];
+    }
     
-    transformAnimation.fillMode = kCAFillModeForwards;
-    transformAnimation.removedOnCompletion = NO;
-    
-    transformAnimation.fromValue = [NSValue valueWithCATransform3D:translateFrom];
-    transformAnimation.toValue = [NSValue valueWithCATransform3D:translateTo];
-    transformAnimation.duration = 0.5;
-    [view.layer addAnimation:transformAnimation forKey:@"transform"];
     
     return view;
 }
 
-- (CATransform3D) stepTransformationForView: (UIView *) view andIndex: (NSInteger) idx
+
+#pragma mark - Animations
+
+- (CABasicAnimation *) animationForViewType: (votingStack) viewType fromKeyFrame: (votingStackPresetKeyFrame) fromKey toKeyFrame: (votingStackPresetKeyFrame) toKey atIndex: (NSInteger) index
 {
-    return CATransform3DTranslate(view.layer.transform, 0.0, 5.0f * idx, -100.0f*idx);
+    switch (viewType) {
+        case votingStackItemView:
+        {
+            return [self animationForItemViewFromKeyFrame:fromKey toKeyFrame:toKey atIndex:index];
+        }
+        default:
+            break;
+    }
+    return nil;
+}
+
+- (CABasicAnimation *) animationForItemViewFromKeyFrame: (votingStackPresetKeyFrame) fromFrame toKeyFrame: (votingStackPresetKeyFrame) toFrame atIndex: (NSInteger) index
+{
+    CATransform3D fromTran = CATransform3DIdentity;
+    CATransform3D toTran = CATransform3DIdentity;
+    CABasicAnimation *transformAnimation = [CABasicAnimation animationWithKeyPath: @"transform"];
+    
+    
+    if (fromFrame == votingStackPresetKeyFrameAtPosition) {
+        fromTran = [self votingStackItemKeyFrame:votingStackPresetKeyFrameAtPosition atIndex:index+1];
+    }
+    
+    if (toFrame == votingStackPresetKeyFrameAtPosition) {
+        toTran = [self votingStackItemKeyFrame:votingStackPresetKeyFrameAtPosition atIndex:(index)];
+    }
+    
+    transformAnimation.fromValue = [NSValue valueWithCATransform3D:fromTran];
+    transformAnimation.toValue = [NSValue valueWithCATransform3D:toTran];
+    transformAnimation.duration = 0.5f;
+    
+    return transformAnimation;
 }
 
 
+
+#pragma mark - Animation Element
+
+- (CATransform3D) votingStackItemKeyFrame: (votingStackPresetKeyFrame) keyFrame atIndex:(NSInteger) index
+{
+    switch (keyFrame) {
+        case votingStackPresetKeyFrameAtPosition:
+        {
+            CATransform3D tran = CATransform3DIdentity;
+            tran.m34 = -1/2000.0f;
+//            tran = CATransform3DRotate(tran, RADIANS(index*-5.0f), 0, 0, 1);
+//            tran = CATransform3DRotate(tran, RADIANS(index*-5.0f), 0, 1, 0);
+            return CATransform3DTranslate(tran, 0.0, 6.0f * index, -100.0f*index);
+        }
+        default:
+            break;
+    }
+    return CATransform3DIdentity;
+}
 
 #pragma mark - View Actions
 
 
 - (void) stepForward
 {
-    self.startingIndex ++;
+    [self.contenterView.subviews[0] removeFromSuperview];
     [UIView animateWithDuration:0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self layOutItemViews];
+        [self layOutItemViewsAnimated:YES];
     } completion:^(BOOL finished) {
-        __block UIView *tempView = nil;
         [self.contenterView.subviews
          enumerateObjectsWithOptions:NSEnumerationReverse
-         usingBlock:^(UIView *obj, NSUInteger idx, BOOL *stop) {
-             if (tempView != nil) {
-                 UIView * myView = [obj.subviews lastObject];
-                 assert(obj.subviews.count == 1);
-                 [[obj.subviews lastObject] removeFromSuperview];
-                 
-                 assert(tempView.superview == nil);
-                 [obj addSubview:tempView];
-                 
-                 tempView = myView;
-             } else {
-                 tempView = [obj.subviews lastObject];
-                 [tempView removeFromSuperview];
-                 assert(obj.subviews.count == 0);
-             }
+         usingBlock:^(UIView *itemView, NSUInteger idx, BOOL *stop) {
+             CABasicAnimation *ani = (CABasicAnimation *)[itemView.layer animationForKey:@"transform"];
+             itemView.layer.transform = [ani.toValue CATransform3DValue];
         }];
     }];
 }

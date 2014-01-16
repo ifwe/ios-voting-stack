@@ -36,7 +36,8 @@
 
 - (UIView *) VotingStackView: (VotingStackView *) vsView viewForItemAtIndex: (NSInteger) index
 {
-    NSString *imgName = [NSString stringWithFormat:@"img %d", index];
+    NSString *imgName = [NSString stringWithFormat:@"img %d", (index % 12)];
+    NSLog(@"%@", imgName);
     return [[UIImageView alloc] initWithImage:[UIImage imageNamed:imgName]];
 }
 
