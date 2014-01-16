@@ -49,7 +49,10 @@
     UIView *contentView = [[UIView alloc] init];
     [self addSubview:contentView];
     self.contenterView = contentView;
-    self.contenterView.frame = self.frame;
+    CGRect rect = self.frame;
+    rect.origin.x = 0;
+    rect.origin.y = 0;
+    self.contenterView.frame = rect;
     
     // the subviews
     for (NSInteger idx = self.startingIndex;
