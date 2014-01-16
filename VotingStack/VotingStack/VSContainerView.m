@@ -41,7 +41,7 @@
 - (void) setup
 {
     // setup basic index numbers
-    self.startingIndex = 0;
+    self.startingIndex = -1;
     self.numberOfViewVisable = 5;
     
     // setup views
@@ -52,8 +52,8 @@
     self.contenterView.frame = self.frame;
     
     // the subviews
-    for (int idx = self.startingIndex;
-         idx < (self.startingIndex + self.numberOfViewVisable);
+    for (NSInteger idx = self.startingIndex;
+         idx < (self.startingIndex + (NSInteger)self.numberOfViewVisable);
          idx++) {
         
         UIView *view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img"]];
@@ -130,6 +130,7 @@
     [UIView animateWithDuration:0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self layOutItemViews];
     } completion:^(BOOL finished) {
+        
     }];
 }
 
