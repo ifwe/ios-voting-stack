@@ -19,7 +19,7 @@
 @interface VSContainerView ()
 
 @property (nonatomic, weak) UIView *contenterView;
-@property (nonatomic) NSUInteger startingIndex;
+@property (nonatomic) NSInteger startingIndex;
 @property (nonatomic) NSUInteger numberOfViewVisable;
 
 
@@ -41,8 +41,8 @@
 - (void) setup
 {
     // setup basic index numbers
-    _startingIndex = 0;
-    _numberOfViewVisable = 5;
+    self.startingIndex = 0;
+    self.numberOfViewVisable = 5;
     
     // setup views
     // the container view
@@ -59,7 +59,11 @@
         UIView *view = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"img"]];
         
         view.frame = CGRectMake(10.0f, 10.0f, 100.0f, 150.0f);
+        CATransform3D idenitiy = CATransform3DIdentity;
+        idenitiy.m34 = 1.0/ -2000;
         
+        view.layer.transform = idenitiy;
+        view.layer.transform = [self stepTransformationForView:view andIndex:idx];
         [contentView addSubview:view];
     }
     
@@ -93,17 +97,27 @@
     }];
 }
 
-- (UIView *) layoutItemView: (UIView *)view andIndex:(NSUInteger)idx
+- (UIView *) layoutItemView: (UIView *)view andIndex:(NSInteger)idx
 {
-    CATransform3D identity = CATransform3DIdentity;
-    // TODO: Set the correct projection matrix
-    identity.m34 = 1.0/ -2000;
-    //CATransform3D rotated = CATransform3DRotate(identity, idx * RADIANS(-20), 1, 0, 0);
-    CATransform3D translate = CATransform3DTranslate(identity, 0.0, idx * 50.0f, idx*-100.0f);
+    CABasicAnimation *transformAnimation = [CABasicAnimation animationWithKeyPath: @"transform"];
     
-    view.layer.transform = translate;
+    CATransform3D translateFrom = [self stepTransformationForView:view andIndex:idx+1];
+    CATransform3D translateTo = [self stepTransformationForView:view andIndex:idx];
+    
+    transformAnimation.fillMode = kCAFillModeForwards;
+    transformAnimation.removedOnCompletion = NO;
+    
+    transformAnimation.fromValue = [NSValue valueWithCATransform3D:translateFrom];
+    transformAnimation.toValue = [NSValue valueWithCATransform3D:translateTo];
+    transformAnimation.duration = 0.5;
+    [view.layer addAnimation:transformAnimation forKey:@"transform"];
     
     return view;
+}
+
+- (CATransform3D) stepTransformationForView: (UIView *) view andIndex: (NSInteger) idx
+{
+    return CATransform3DTranslate(view.layer.transform, 0.0, 5.0f * idx, -100.0f*idx);
 }
 
 
@@ -113,11 +127,10 @@
 
 - (void) stepForward
 {
-    self.startingIndex++;
-    
-    [UIView animateWithDuration:100 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
+    [UIView animateWithDuration:0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self layOutItemViews];
-    } completion:nil];
+    } completion:^(BOOL finished) {
+    }];
 }
 
 
