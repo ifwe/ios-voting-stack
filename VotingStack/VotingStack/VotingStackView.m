@@ -60,15 +60,22 @@
          idx < (self.startingIndex + (NSInteger)self.numberOfViewVisable);
          idx++) {
         
-        UIView *view = [self.dataSource VotingStackView:weakSelf viewForItemAtIndex:idx];
+        UIView *dataView = [self.dataSource VotingStackView:weakSelf viewForItemAtIndex:idx];
+        CGRect dataViewRect = dataView.frame;
+        dataViewRect.origin = CGPointMake(0, 0);
+        dataViewRect.size = CGSizeMake(100.0f, 150.0f);
+        dataView.frame = dataViewRect;
         
-        view.frame = CGRectMake(10.0f, 10.0f, 100.0f, 150.0f);
+        dataViewRect.origin = CGPointMake(10.0f, 10.0f);
+        UIView *itemContainerView = [[UIView alloc] initWithFrame:dataViewRect];
+        [itemContainerView addSubview:dataView];
+        
         CATransform3D idenitiy = CATransform3DIdentity;
         idenitiy.m34 = 1.0/ -2000;
         
-        view.layer.transform = idenitiy;
-        view.layer.transform = [self stepTransformationForView:view andIndex:idx];
-        [contentView addSubview:view];
+        itemContainerView.layer.transform = idenitiy;
+        itemContainerView.layer.transform = [self stepTransformationForView:itemContainerView andIndex:idx];
+        [contentView addSubview:itemContainerView];
     }
     
 }
@@ -131,10 +138,29 @@
 
 - (void) stepForward
 {
+    self.startingIndex ++;
     [UIView animateWithDuration:0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
         [self layOutItemViews];
     } completion:^(BOOL finished) {
-        
+        __block UIView *tempView = nil;
+        [self.contenterView.subviews
+         enumerateObjectsWithOptions:NSEnumerationReverse
+         usingBlock:^(UIView *obj, NSUInteger idx, BOOL *stop) {
+             if (tempView != nil) {
+                 UIView * myView = [obj.subviews lastObject];
+                 assert(obj.subviews.count == 1);
+                 [[obj.subviews lastObject] removeFromSuperview];
+                 
+                 assert(tempView.superview == nil);
+                 [obj addSubview:tempView];
+                 
+                 tempView = myView;
+             } else {
+                 tempView = [obj.subviews lastObject];
+                 [tempView removeFromSuperview];
+                 assert(obj.subviews.count == 0);
+             }
+        }];
     }];
 }
 
