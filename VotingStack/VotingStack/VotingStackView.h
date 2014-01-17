@@ -7,27 +7,33 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <QuartzCore/QuartzCore.h>
-
-@protocol VotingStackViewDataSource;
-
-@interface VotingStackView : UIView
-
-@property (nonatomic, weak) id<VotingStackViewDataSource> dataSource;
-- (void) stepForward;
-
-
-@end
 
 
 
+@class VotingStackView;
 
 @protocol VotingStackViewDataSource <NSObject>
 @required
 
-- (UIView *) VotingStackView: (VotingStackView *) vsView viewForItemAtIndex: (NSInteger) index;
+- (NSUInteger)numberOfItemsInVotingStack:(VotingStackView *)vsView;
+- (UIView *)votingStack:(VotingStackView *)vsView viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view;
+
+
+
 @optional
 
 
 
 @end
+
+
+
+
+
+@interface VotingStackView : UIView
+@property (nonatomic, weak) IBOutlet id<VotingStackViewDataSource> dataSource;
+
+
+@end
+
+
