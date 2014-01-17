@@ -28,7 +28,7 @@
 }
 
 - (IBAction)stepForward:(id)sender {
-//    [self.voteView stepForward];
+    
 }
 
 #pragma mark - VotingStackViewDataSource
@@ -52,7 +52,7 @@
     NSString *imgName = [NSString stringWithFormat:@"img %d", (index % 12)];
     NSLog(@"%@", imgName);
     UIImageView * imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imgName]];
-    imgView.frame = CGRectMake(0, 0, 100, 150);
+    imgView.frame = CGRectMake(0, 0, 200, 250);
     return imgView;
     
 }

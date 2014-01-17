@@ -33,6 +33,7 @@
 @interface VotingStackView : UIView
 @property (nonatomic, weak) IBOutlet id<VotingStackViewDataSource> dataSource;
 
+- (void) popFront;
 
 @end
 

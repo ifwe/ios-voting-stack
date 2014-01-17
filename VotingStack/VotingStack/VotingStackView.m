@@ -27,14 +27,22 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         iCarousel * car = [[iCarousel alloc] initWithFrame:self.bounds];
-        car.type = iCarouselTypeTimeMachine;
+        car.type = iCarouselTypeInvertedTimeMachine;
         car.vertical = YES;
         car.dataSource = self;
         car.delegate = self;
+        
         [self addSubview:car];
         self.carousel = car;
     });
 }
+
+
+- (void)popFront
+{
+    [self.carousel scrollToItemAtIndex:self.carousel.currentItemIndex+1 animated:YES];
+}
+
 
 #pragma mark - View layout
 
@@ -55,5 +63,22 @@
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view{
     return [self.dataSource votingStack:self viewForItemAtIndex:index reusingView:view];
 }
+
+
+
+- (CGFloat)carousel:(iCarousel *)carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value{
+    switch (option) {
+        case iCarouselOptionTilt:
+            return 0.5f;
+        case iCarouselOptionSpacing:
+            return 1.8f;
+        case iCarouselOptionWrap:
+            return YES;
+        default:
+            return value;
+    }
+}
+
+
 
 @end
