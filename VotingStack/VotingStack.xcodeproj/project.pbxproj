@@ -25,6 +25,7 @@
 		7C688FE21884C977006B576D /* VotingStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C688FE11884C977006B576D /* VotingStackView.m */; };
 		7C688FE51885B3C7006B576D /* img 0.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C688FE41885B3C7006B576D /* img 0.png */; };
 		7CB7BAAE1889DE25004EBC62 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7BAAD1889DE25004EBC62 /* iCarousel.m */; };
+		7CB7BAB11889EDC0004EBC62 /* iCarousel+votingStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7BAB01889EDC0004EBC62 /* iCarousel+votingStackView.m */; };
 		7CC46D1218889117006E2AA8 /* img 12.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CC46D0C18889117006E2AA8 /* img 12.png */; };
 		7CC46D1318889117006E2AA8 /* img 8.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CC46D0D18889117006E2AA8 /* img 8.png */; };
 		7CC46D1418889117006E2AA8 /* img 9.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CC46D0E18889117006E2AA8 /* img 9.png */; };
@@ -76,6 +77,8 @@
 		7C688FE41885B3C7006B576D /* img 0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img 0.png"; sourceTree = "<group>"; };
 		7CB7BAAC1889DE25004EBC62 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		7CB7BAAD1889DE25004EBC62 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
+		7CB7BAAF1889EDC0004EBC62 /* iCarousel+votingStackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "iCarousel+votingStackView.h"; sourceTree = "<group>"; };
+		7CB7BAB01889EDC0004EBC62 /* iCarousel+votingStackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "iCarousel+votingStackView.m"; sourceTree = "<group>"; };
 		7CC46D0C18889117006E2AA8 /* img 12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img 12.png"; sourceTree = "<group>"; };
 		7CC46D0D18889117006E2AA8 /* img 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img 8.png"; sourceTree = "<group>"; };
 		7CC46D0E18889117006E2AA8 /* img 9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img 9.png"; sourceTree = "<group>"; };
@@ -155,6 +158,8 @@
 				7C688FE11884C977006B576D /* VotingStackView.m */,
 				7CB7BAAC1889DE25004EBC62 /* iCarousel.h */,
 				7CB7BAAD1889DE25004EBC62 /* iCarousel.m */,
+				7CB7BAAF1889EDC0004EBC62 /* iCarousel+votingStackView.h */,
+				7CB7BAB01889EDC0004EBC62 /* iCarousel+votingStackView.m */,
 			);
 			path = VotingStack;
 			sourceTree = "<group>";
@@ -331,6 +336,7 @@
 			files = (
 				7C688FC11884C64F006B576D /* VSViewController.m in Sources */,
 				7CB7BAAE1889DE25004EBC62 /* iCarousel.m in Sources */,
+				7CB7BAB11889EDC0004EBC62 /* iCarousel+votingStackView.m in Sources */,
 				7C688FB41884C64F006B576D /* main.m in Sources */,
 				7C688FB81884C64F006B576D /* VSAppDelegate.m in Sources */,
 				7C688FE21884C977006B576D /* VotingStackView.m in Sources */,

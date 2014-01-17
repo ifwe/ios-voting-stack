@@ -148,7 +148,7 @@ iCarouselOption;
 - (CGFloat)offsetForItemAtIndex:(NSInteger)index;
 - (UIView *)itemViewAtPoint:(CGPoint)point;
 
-- (UIView *)removeItemAtIndex:(NSInteger)index animated:(BOOL)animated;
+- (void)removeItemAtIndex:(NSInteger)index animated:(BOOL)animated;
 - (void)insertItemAtIndex:(NSInteger)index animated:(BOOL)animated;
 - (void)reloadItemAtIndex:(NSInteger)index animated:(BOOL)animated;
 

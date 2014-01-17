@@ -28,7 +28,7 @@
 }
 
 - (IBAction)stepForward:(id)sender {
-    
+    [self.voteView popFront];
 }
 
 #pragma mark - VotingStackViewDataSource

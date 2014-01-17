@@ -7,7 +7,7 @@
 //
 
 #import "VotingStackView.h"
-#import "iCarousel.h"
+#import "iCarousel+votingStackView.h"
 
 
 
@@ -79,6 +79,12 @@
     }
 }
 
+
+
+- (void)carouselWillBeginScrollingAnimation:(iCarousel *)carousel
+{
+    
+}
 
 
 @end
