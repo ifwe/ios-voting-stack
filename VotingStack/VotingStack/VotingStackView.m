@@ -11,8 +11,10 @@
 
 
 #pragma mark - Macros
-#define RADIANS(deg)  ((deg) * M_PI / 180)
-#define DEGREES(rad)  ((rad) * 180 / M_PI)
+#define RADIANS(deg)  ((deg) * M_PI / 180.0f)
+#define DEGREES(rad)  ((rad) * 180.0f / M_PI)
+
+#define DISTANCE_FROM_SCREEN (1500.0f);
 
 
 
@@ -51,6 +53,10 @@ typedef enum{
     // setup basic index numbers
     self.startingIndex = 0;
     self.numberOfViewVisable = 12;
+    
+    CATransform3D perceptive = self.layer.transform;
+    perceptive.m34 = -1.0f/DISTANCE_FROM_SCREEN;
+    self.layer.sublayerTransform = perceptive;
     
     // setup views
     // the container view
@@ -119,15 +125,15 @@ typedef enum{
 
 - (UIView *) layoutItemView: (UIView *)view andIndex:(NSInteger)idx animated:(BOOL) animated
 {
+    
     CABasicAnimation *transformAnimation = [self animationForViewType:votingStackItemView
                                                          fromKeyFrame:votingStackPresetKeyFrameAtPosition
                                                            toKeyFrame:votingStackPresetKeyFrameAtPosition
                                                               atIndex:idx ];
+    view.layer.transform = [transformAnimation.toValue CATransform3DValue];
     
     if (animated) {
         [view.layer addAnimation:transformAnimation forKey:@"transform"];
-    } else {
-        view.layer.transform = [transformAnimation.toValue CATransform3DValue];
     }
     
     
@@ -182,7 +188,6 @@ typedef enum{
         case votingStackPresetKeyFrameAtPosition:
         {
             CATransform3D tran = CATransform3DIdentity;
-            tran.m34 = -1/2000.0f;
 //            tran = CATransform3DRotate(tran, RADIANS(index*-5.0f), 0, 0, 1);
 //            tran = CATransform3DRotate(tran, RADIANS(index*-5.0f), 0, 1, 0);
             return CATransform3DTranslate(tran, 0.0, 6.0f * index, -100.0f*index);
@@ -199,16 +204,7 @@ typedef enum{
 - (void) stepForward
 {
     [self.contenterView.subviews[0] removeFromSuperview];
-    [UIView animateWithDuration:0 delay:0 options:UIViewAnimationOptionCurveEaseInOut animations:^{
-        [self layOutItemViewsAnimated:YES];
-    } completion:^(BOOL finished) {
-        [self.contenterView.subviews
-         enumerateObjectsWithOptions:NSEnumerationReverse
-         usingBlock:^(UIView *itemView, NSUInteger idx, BOOL *stop) {
-             CABasicAnimation *ani = (CABasicAnimation *)[itemView.layer animationForKey:@"transform"];
-             itemView.layer.transform = [ani.toValue CATransform3DValue];
-        }];
-    }];
+    [self layOutItemViewsAnimated:YES];
 }
 
 
