@@ -40,6 +40,7 @@
 
 - (void)popFront
 {
+    [self.carousel itemViewAtIndex:self.carousel.currentItemIndex+1].layer.opacity = 0.0;
     [self.carousel scrollToItemAtIndex:self.carousel.currentItemIndex+1 animated:YES];
 }
 
