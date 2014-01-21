@@ -32,13 +32,18 @@
         car.vertical = YES;
         car.dataSource = self;
         car.delegate = self;
+        car.userInteractionEnabled = NO;
+        
+        self.carousel = car;
+        [self addSubview:car];
+        
         
         UIView * selectionTempView = [[UIView alloc] initWithFrame:self.bounds];
+        self.SelectionView.userInteractionEnabled = YES;
+        
         self.SelectionView = selectionTempView;
         [self addSubview:self.SelectionView];
         
-        [self addSubview:car];
-        self.carousel = car;
     });
 }
 
@@ -89,7 +94,7 @@
 
 - (void)carouselWillBeginScrollingAnimation:(iCarousel *)carousel
 {
-    if ([[self.SelectionView subviews] count] != 0) {        
+    if ([[self.SelectionView subviews] count] != 0) {
         assert([[self.SelectionView subviews] count] == 1);
         [[[self.SelectionView subviews] lastObject] removeFromSuperview];
     }
@@ -99,6 +104,9 @@
 - (void)carouselDidEndScrollingAnimation:(iCarousel *)carousel
 {
     UIView * topView = [self.carousel itemViewAtIndex:self.carousel.currentItemIndex];
+    
+    topView.frame = topView.superview.frame;
+    
     topView.layer.opacity = 1.0f;
     [self.SelectionView addSubview:topView];
 }
