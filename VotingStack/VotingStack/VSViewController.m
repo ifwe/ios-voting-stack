@@ -33,15 +33,6 @@
 
 #pragma mark - VotingStackViewDataSource
 
-
-- (UIView *) VotingStackView: (VotingStackView *) vsView viewForItemAtIndex: (NSInteger) index
-{
-    NSString *imgName = [NSString stringWithFormat:@"img %d", (index % 12)];
-    NSLog(@"%@", imgName);
-    return [[UIImageView alloc] initWithImage:[UIImage imageNamed:imgName]];
-}
-
-
 - (NSUInteger)numberOfItemsInVotingStack:(VotingStackView *)vsView{
     return 12;
 }
@@ -50,7 +41,6 @@
 - (UIView *)votingStack:(VotingStackView *)vsView viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view{
     
     NSString *imgName = [NSString stringWithFormat:@"img %d", (index % 12)];
-    NSLog(@"%@", imgName);
     UIImageView * imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imgName]];
     imgView.frame = CGRectMake(0, 0, 200, 250);
     return imgView;

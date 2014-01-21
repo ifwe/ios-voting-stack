@@ -18,11 +18,7 @@
 - (NSUInteger)numberOfItemsInVotingStack:(VotingStackView *)vsView;
 - (UIView *)votingStack:(VotingStackView *)vsView viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view;
 
-
-
 @optional
-
-
 
 @end
 
@@ -30,8 +26,24 @@
 
 
 
+
+@protocol VotingStackViewDelegate <NSObject>
+
+@optional
+
+- (void) votingStack:(VotingStackView *) vsView didSelectionItemAtIndex: (NSInteger) index;
+
+@end
+
+
+
+
+
+
+
 @interface VotingStackView : UIView
 @property (nonatomic, weak) IBOutlet id<VotingStackViewDataSource> dataSource;
+@property (nonatomic, weak) IBOutlet id<VotingStackViewDelegate> delegate;
 
 - (void) popFront;
 
