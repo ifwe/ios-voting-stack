@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+#define VOTING_STACK_DEBUG (YES)
 
 
 @class VotingStackView;

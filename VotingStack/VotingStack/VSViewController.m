@@ -34,7 +34,7 @@
 #pragma mark - VotingStackViewDataSource
 
 - (NSUInteger)numberOfItemsInVotingStack:(VotingStackView *)vsView{
-    return 12;
+    return 1;
 }
 
 

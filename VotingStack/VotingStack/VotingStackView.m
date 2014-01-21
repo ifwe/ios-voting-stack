@@ -66,8 +66,10 @@
 
 - (void)popFront
 {
-    [self.carousel itemViewAtIndex:self.carousel.currentItemIndex].layer.opacity = 0.0;
-    [self.carousel scrollToItemAtIndex:self.carousel.currentItemIndex+1 animated:YES];
+    if ([self.carousel numberOfItems] > 1) {
+        [self.carousel itemViewAtIndex:self.carousel.currentItemIndex].layer.opacity = 0.0;
+        [self.carousel scrollToItemAtIndex:self.carousel.currentItemIndex+1 animated:YES];        
+    }
 }
 
 - (UIView *) currentSelectedView {
@@ -141,8 +143,10 @@
     switch (panGesture.state) {
         case UIGestureRecognizerStateChanged:
         {
-            NSLog(@"%f, dx=(x=%f, y=%f)", DEGREES(angle), dxPointFromOrigin.x, dxPointFromOrigin.y);
             
+#ifdef VOTING_STACK_DEBUG
+            NSLog(@"%f, dx=(x=%f, y=%f)", DEGREES(angle), dxPointFromOrigin.x, dxPointFromOrigin.y);
+#endif
             CATransform3D rotation = CATransform3DMakeTranslation(dxPointFromOrigin.x, dxPointFromOrigin.y+halfViewHeight, 0.0f);
             
             rotation = CATransform3DRotate(rotation, angle - M_PI_2, 0, 0, 1);
