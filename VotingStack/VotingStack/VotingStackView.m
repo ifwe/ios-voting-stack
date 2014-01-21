@@ -15,6 +15,7 @@
 @interface VotingStackView () <iCarouselDataSource, iCarouselDelegate>
 
 @property (nonatomic, weak) iCarousel *carousel;
+@property (nonatomic, weak) UIView *SelectionView;
 
 @end
 
@@ -32,6 +33,10 @@
         car.dataSource = self;
         car.delegate = self;
         
+        UIView * selectionTempView = [[UIView alloc] initWithFrame:self.bounds];
+        self.SelectionView = selectionTempView;
+        [self addSubview:self.SelectionView];
+        
         [self addSubview:car];
         self.carousel = car;
     });
@@ -40,7 +45,7 @@
 
 - (void)popFront
 {
-    [self.carousel itemViewAtIndex:self.carousel.currentItemIndex+1].layer.opacity = 0.0;
+    [self.carousel itemViewAtIndex:self.carousel.currentItemIndex].layer.opacity = 0.0;
     [self.carousel scrollToItemAtIndex:self.carousel.currentItemIndex+1 animated:YES];
 }
 
@@ -84,7 +89,18 @@
 
 - (void)carouselWillBeginScrollingAnimation:(iCarousel *)carousel
 {
-    
+    if ([[self.SelectionView subviews] count] != 0) {        
+        assert([[self.SelectionView subviews] count] == 1);
+        [[[self.SelectionView subviews] lastObject] removeFromSuperview];
+    }
+}
+
+
+- (void)carouselDidEndScrollingAnimation:(iCarousel *)carousel
+{
+    UIView * topView = [self.carousel itemViewAtIndex:self.carousel.currentItemIndex];
+    topView.layer.opacity = 1.0f;
+    [self.SelectionView addSubview:topView];
 }
 
 
