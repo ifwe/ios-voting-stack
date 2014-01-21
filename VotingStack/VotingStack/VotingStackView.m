@@ -20,7 +20,6 @@
 @property (nonatomic, weak) iCarousel *carousel;
 @property (nonatomic, weak) UIView *SelectionView;
 @property (nonatomic, strong) UIPanGestureRecognizer * panGesture;
-@property (nonatomic) CGFloat selectionBeginAngle;
 
 @end
 
@@ -50,7 +49,6 @@
         [self addSubview:self.SelectionView];
         
         self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
-        self.selectionBeginAngle = 0;
     });
 }
 
@@ -134,28 +132,26 @@
 - (void) pan:(UIPanGestureRecognizer *) panGesture
 {
     CGPoint dxPointFromOrigin = [panGesture translationInView:self.SelectionView];
+    CGFloat halfViewHeight = [[self currentSelectedView] frame].size.height/2.0f;
+    
+    dxPointFromOrigin.y -= halfViewHeight;
     
     CGFloat angle = atan2f(dxPointFromOrigin.y, dxPointFromOrigin.x) + M_PI;
     
     switch (panGesture.state) {
         case UIGestureRecognizerStateChanged:
         {
+            NSLog(@"%f, dx=(x=%f, y=%f)", DEGREES(angle), dxPointFromOrigin.x, dxPointFromOrigin.y);
             
-            CGPoint posInWindow = [panGesture translationInView:self];
+            CATransform3D rotation = CATransform3DMakeTranslation(dxPointFromOrigin.x, dxPointFromOrigin.y+halfViewHeight, 0.0f);
             
-            
-            NSLog(@"%f, dx=(x=%f, y=%f), pos=(x=%f, y=%f)", DEGREES(angle), dxPointFromOrigin.x, dxPointFromOrigin.y, posInWindow.x, posInWindow.y);
-            
-            CATransform3D rotation = CATransform3DMakeTranslation(dxPointFromOrigin.x, dxPointFromOrigin.y, 0.0f); // CATransform3DMakeRotation(angle - M_PI_2, 0, 0, 1);
-            
-            rotation = CATransform3DRotate(rotation, angle - M_PI_2, 0, 0, 1); //CATransform3DTranslate(rotation, dxPointFromOrigin.x, dxPointFromOrigin.y, 0);
+            rotation = CATransform3DRotate(rotation, angle - M_PI_2, 0, 0, 1);
             
             [self currentSelectedView].layer.transform = rotation;
         }
             break;
         case UIGestureRecognizerStateBegan:
         {
-            self.selectionBeginAngle = angle;
             [self currentSelectedView].layer.anchorPoint = CGPointMake(0.5f, 1.0f);
         }
         case UIGestureRecognizerStateEnded:
