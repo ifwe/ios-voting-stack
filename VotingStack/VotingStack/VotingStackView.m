@@ -21,8 +21,6 @@
 
 @property (nonatomic, weak) UIView *oldCarouselContainerView;
 
-@property (nonatomic) BOOL isScrollingRestoring;
-
 @property (nonatomic, weak) UIView *SelectionView;
 
 @property (nonatomic, strong) UIPanGestureRecognizer * panGesture;
@@ -84,7 +82,6 @@
 
 - (void)popFront
 {
-    self.isScrollingRestoring = NO;
     if ([self.carousel numberOfItems] > 1) {
         [self.carousel itemViewAtIndex:self.carousel.currentItemIndex].layer.opacity = 0.0f;
         [self.carousel scrollToItemAtIndex:self.carousel.currentItemIndex+1 animated:YES];
@@ -93,7 +90,6 @@
 
 - (void) pushFront
 {
-    self.isScrollingRestoring = YES;
     if ([self.carousel numberOfItems] > 1) {
         [self.carousel scrollToItemAtIndex:self.carousel.currentItemIndex-1 animated:YES];
     }
@@ -140,7 +136,7 @@
         
         [currentView removeGestureRecognizer:self.panGesture];
         
-        currentView.layer.opacity = (self.isScrollingRestoring)?1.0f:0.0f;
+        currentView.layer.opacity = 0.0f;
         
         CGRect restoringFrame = currentView.frame;
         restoringFrame.origin = CGPointZero;
@@ -175,18 +171,20 @@
 - (void) pan:(UIPanGestureRecognizer *) panGesture
 {
     CGPoint dxPointFromOrigin = [panGesture translationInView:self.SelectionView];
-    CGFloat halfViewHeight = [[self currentSelectedView] frame].size.height/2.0f;
+    CGFloat halfViewHeight = [[self currentSelectedView] bounds].size.height/2.0f;
     
-    dxPointFromOrigin.y -= halfViewHeight;
+    dxPointFromOrigin.y = dxPointFromOrigin.y - halfViewHeight;
     
     CGFloat angle = atan2f(dxPointFromOrigin.y, dxPointFromOrigin.x) + M_PI;
+    
+    
     
     switch (panGesture.state) {
         case UIGestureRecognizerStateChanged:
         {
             
 #ifdef VOTING_STACK_DEBUG
-            NSLog(@"%f, dx=(x=%f, y=%f)", DEGREES(angle), dxPointFromOrigin.x, dxPointFromOrigin.y);
+            NSLog(@"2: %f, dx=(x=%f, y=%f)", DEGREES(angle), dxPointFromOrigin.x, dxPointFromOrigin.y);
 #endif
             CATransform3D rotation = CATransform3DMakeTranslation(dxPointFromOrigin.x, dxPointFromOrigin.y+halfViewHeight, 0.0f);
             
