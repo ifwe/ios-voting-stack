@@ -26,6 +26,7 @@
 		7C688FE51885B3C7006B576D /* img 0.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C688FE41885B3C7006B576D /* img 0.png */; };
 		7CB7BAAE1889DE25004EBC62 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7BAAD1889DE25004EBC62 /* iCarousel.m */; };
 		7CB7BAB11889EDC0004EBC62 /* iCarousel+votingStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7CB7BAB01889EDC0004EBC62 /* iCarousel+votingStackView.m */; };
+		7CB7BAB6188F3B14004EBC62 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CB7BAB5188F3B14004EBC62 /* CoreMotion.framework */; };
 		7CC46D1218889117006E2AA8 /* img 12.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CC46D0C18889117006E2AA8 /* img 12.png */; };
 		7CC46D1318889117006E2AA8 /* img 8.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CC46D0D18889117006E2AA8 /* img 8.png */; };
 		7CC46D1418889117006E2AA8 /* img 9.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CC46D0E18889117006E2AA8 /* img 9.png */; };
@@ -79,6 +80,7 @@
 		7CB7BAAD1889DE25004EBC62 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		7CB7BAAF1889EDC0004EBC62 /* iCarousel+votingStackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "iCarousel+votingStackView.h"; sourceTree = "<group>"; };
 		7CB7BAB01889EDC0004EBC62 /* iCarousel+votingStackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "iCarousel+votingStackView.m"; sourceTree = "<group>"; };
+		7CB7BAB5188F3B14004EBC62 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		7CC46D0C18889117006E2AA8 /* img 12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img 12.png"; sourceTree = "<group>"; };
 		7CC46D0D18889117006E2AA8 /* img 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img 8.png"; sourceTree = "<group>"; };
 		7CC46D0E18889117006E2AA8 /* img 9.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img 9.png"; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7CB7BAB6188F3B14004EBC62 /* CoreMotion.framework in Frameworks */,
 				EE946407188500E70072D96C /* QuartzCore.framework in Frameworks */,
 				7C688FAA1884C64F006B576D /* CoreGraphics.framework in Frameworks */,
 				7C688FAC1884C64F006B576D /* UIKit.framework in Frameworks */,
@@ -142,6 +145,7 @@
 		7C688FA61884C64F006B576D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7CB7BAB5188F3B14004EBC62 /* CoreMotion.framework */,
 				EE946406188500E70072D96C /* QuartzCore.framework */,
 				7C688FA71884C64F006B576D /* Foundation.framework */,
 				7C688FA91884C64F006B576D /* CoreGraphics.framework */,

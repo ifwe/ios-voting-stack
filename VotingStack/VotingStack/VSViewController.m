@@ -17,7 +17,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    self.voteView.dataSource = self;
+    self.voteView.backgroundColor = [UIColor grayColor];
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -34,7 +34,7 @@
 #pragma mark - VotingStackViewDataSource
 
 - (NSUInteger)numberOfItemsInVotingStack:(VotingStackView *)vsView{
-    return 1;
+    return 12;
 }
 
 

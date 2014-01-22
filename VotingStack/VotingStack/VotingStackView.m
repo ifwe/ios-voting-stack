@@ -49,7 +49,13 @@
         [self addSubview:self.SelectionView];
         
         self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
+        
     });
+}
+
+- (void) cleanUp
+{
+    
 }
 
 
@@ -61,6 +67,12 @@
     [self setup];
 }
 
+- (void) removeFromSuperview
+{
+    [self cleanUp];
+    [super removeFromSuperview];
+}
+
 
 #pragma mark - View functions
 
@@ -68,7 +80,7 @@
 {
     if ([self.carousel numberOfItems] > 1) {
         [self.carousel itemViewAtIndex:self.carousel.currentItemIndex].layer.opacity = 0.0;
-        [self.carousel scrollToItemAtIndex:self.carousel.currentItemIndex+1 animated:YES];        
+        [self.carousel scrollToItemAtIndex:self.carousel.currentItemIndex+1 animated:YES];
     }
 }
 
@@ -167,7 +179,7 @@
         default:
             break;
     }
-    
 }
+
 
 @end
