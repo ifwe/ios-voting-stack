@@ -48,6 +48,7 @@
 @property (nonatomic, weak) IBOutlet id<VotingStackViewDelegate> delegate;
 
 - (void) popFront;
+- (void) pushFront;
 
 @end
 

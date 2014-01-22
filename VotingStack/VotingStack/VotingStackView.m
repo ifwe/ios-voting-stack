@@ -18,7 +18,13 @@
 @interface VotingStackView () <iCarouselDataSource, iCarouselDelegate>
 
 @property (nonatomic, weak) iCarousel *carousel;
+
+@property (nonatomic, weak) UIView *oldCarouselContainerView;
+
+@property (nonatomic) BOOL isScrollingRestoring;
+
 @property (nonatomic, weak) UIView *SelectionView;
+
 @property (nonatomic, strong) UIPanGestureRecognizer * panGesture;
 
 @end
@@ -78,9 +84,18 @@
 
 - (void)popFront
 {
+    self.isScrollingRestoring = NO;
     if ([self.carousel numberOfItems] > 1) {
-        [self.carousel itemViewAtIndex:self.carousel.currentItemIndex].layer.opacity = 0.0;
+        [self.carousel itemViewAtIndex:self.carousel.currentItemIndex].layer.opacity = 0.0f;
         [self.carousel scrollToItemAtIndex:self.carousel.currentItemIndex+1 animated:YES];
+    }
+}
+
+- (void) pushFront
+{
+    self.isScrollingRestoring = YES;
+    if ([self.carousel numberOfItems] > 1) {
+        [self.carousel scrollToItemAtIndex:self.carousel.currentItemIndex-1 animated:YES];
     }
 }
 
@@ -121,9 +136,21 @@
 {
     if ([[self.SelectionView subviews] count] != 0) {
         
-        [[self currentSelectedView] removeGestureRecognizer:self.panGesture];
+        UIView * currentView = [self currentSelectedView];
         
-        [[self currentSelectedView] removeFromSuperview];
+        [currentView removeGestureRecognizer:self.panGesture];
+        
+        currentView.layer.opacity = (self.isScrollingRestoring)?1.0f:0.0f;
+        
+        CGRect restoringFrame = currentView.frame;
+        restoringFrame.origin = CGPointZero;
+        currentView.frame = restoringFrame;
+        
+        [currentView removeFromSuperview];
+        
+        [self.oldCarouselContainerView addSubview:currentView];
+        
+
     }
 }
 
@@ -136,6 +163,8 @@
     topView.userInteractionEnabled = YES;
     
     [topView addGestureRecognizer:self.panGesture];
+    
+    self.oldCarouselContainerView = topView.superview;
     
     [self.SelectionView addSubview:topView];
 }
