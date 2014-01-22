@@ -10,6 +10,8 @@
 
 @interface VSViewController () <VotingStackViewDataSource>
 
+@property (nonatomic, strong) NSMutableArray *arrayOfView;
+
 @end
 
 @implementation VSViewController
@@ -31,20 +33,35 @@
     [self.voteView popFront];
 }
 
+- (IBAction)pushFront:(UIButton *)sender {
+    [self.voteView pushFront];
+}
+
+- (NSMutableArray *) arrayOfView
+{
+    if (!_arrayOfView) {
+        _arrayOfView = [[NSMutableArray alloc] init];
+        for (int i = 0; i < 12; i++) {
+            
+            NSString *imgName = [NSString stringWithFormat:@"img %d", (i % 12)];
+            UIImageView * imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imgName]];
+            imgView.frame = CGRectMake(0, 0, 200, 250);
+            
+            [_arrayOfView addObject:imgView];
+        }
+    }
+    return _arrayOfView;
+}
+
 #pragma mark - VotingStackViewDataSource
 
 - (NSUInteger)numberOfItemsInVotingStack:(VotingStackView *)vsView{
-    return 12;
+    return [self.arrayOfView count];
 }
 
 
 - (UIView *)votingStack:(VotingStackView *)vsView viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view{
-    
-    NSString *imgName = [NSString stringWithFormat:@"img %d", (index % 12)];
-    UIImageView * imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imgName]];
-    imgView.frame = CGRectMake(0, 0, 200, 250);
-    return imgView;
-    
+    return [self.arrayOfView objectAtIndex:index];
 }
 
 @end
