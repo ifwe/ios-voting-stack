@@ -8,6 +8,7 @@
 
 #import "VotingStackView.h"
 #import "iCarousel+votingStackView.h"
+#import "XYPieChart.h"
 
 
 #pragma mark - Macros
@@ -15,15 +16,20 @@
 #define DEGREES(rad)  ((rad) * 180 / M_PI)
 
 
-@interface VotingStackView () <iCarouselDataSource, iCarouselDelegate>
+@interface VotingStackView () <iCarouselDataSource, iCarouselDelegate, XYPieChartDataSource, XYPieChartDelegate>
 
 @property (nonatomic, weak) iCarousel *carousel;
+
 
 @property (nonatomic, weak) UIView *oldCarouselContainerView;
 
 @property (nonatomic, weak) UIView *SelectionView;
 
-@property (nonatomic, strong) UIPanGestureRecognizer * panGesture;
+@property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
+
+@property (nonatomic, weak) XYPieChart *pieChart;
+
+@property (nonatomic) BOOL shouldLoadUserSelectionData;
 
 @end
 
@@ -42,17 +48,29 @@
         car.delegate = self;
         car.userInteractionEnabled = NO;
         
-        self.carousel = car;
-        [self addSubview:car];
+        _carousel = car;
+        [self addSubview:_carousel];
+        
+        
         
         
         UIView * selectionTempView = [[UIView alloc] initWithFrame:self.bounds];
-        self.SelectionView.userInteractionEnabled = YES;
+        selectionTempView.userInteractionEnabled = YES;
         
-        self.SelectionView = selectionTempView;
-        [self addSubview:self.SelectionView];
+        _SelectionView = selectionTempView;
+        [self addSubview:_SelectionView];
         
-        self.panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
+        _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
+        
+        
+        
+        XYPieChart *pieChartTemp = [[XYPieChart alloc] initWithFrame:_SelectionView.frame Center:_SelectionView.center Radius:100.0f];
+        pieChartTemp.dataSource = self;
+        pieChartTemp.delegate = self;
+        pieChartTemp.userInteractionEnabled = NO;
+        
+        _pieChart = pieChartTemp;
+        [self addSubview:pieChartTemp];
         
     });
 }
@@ -179,6 +197,48 @@
     [self.SelectionView addSubview:topView];
 }
 
+
+#pragma mark - XYPieChartDataSource
+
+
+- (NSUInteger)numberOfSlicesInPieChart:(XYPieChart *)pieChart
+{
+    if (self.shouldLoadUserSelectionData) {
+        return [self.dataSource votingStack:self numberOfSelectionForIndex:self.carousel.currentItemIndex];
+    }else{
+        return 0;
+    }
+}
+
+- (CGFloat)pieChart:(XYPieChart *)pieChart valueForSliceAtIndex:(NSUInteger)index
+{
+    if (self.shouldLoadUserSelectionData) {
+        return [self.dataSource votingStack:self valueForSliceAtIndex:index forItem:self.carousel.currentItemIndex];
+    } else {
+        return 0.0f;
+    }
+}
+
+
+
+- (UIColor *)pieChart:(XYPieChart *)pieChart colorForSliceAtIndex:(NSUInteger)index
+{
+    NSArray * arrColor = [NSArray arrayWithObjects:
+     [UIColor colorWithRed:246/255.0 green:155/255.0 blue:0/255.0 alpha:0.5f],
+     [UIColor colorWithRed:129/255.0 green:195/255.0 blue:29/255.0 alpha:0.5f],
+     [UIColor colorWithRed:62/255.0 green:173/255.0 blue:219/255.0 alpha:0.5f],
+     [UIColor colorWithRed:229/255.0 green:66/255.0 blue:115/255.0 alpha:0.5f],
+                          [UIColor colorWithRed:148/255.0 green:141/255.0 blue:139/255.0 alpha:0.5f],nil];
+    return [arrColor objectAtIndex:(index % arrColor.count)];
+}
+
+
+
+//#pragma mark - XYPieChartDelegate
+
+
+
+
 #pragma mark - UIPanGestureRecognizer
 
 
@@ -186,7 +246,7 @@
 {
     CGPoint dxPointFromOrigin = [panGesture translationInView:self.SelectionView];
     
-    CGPoint locationOnScreen = [panGesture locationInView:[[UIApplication sharedApplication] keyWindow]];
+//    CGPoint locationOnScreen = [panGesture locationInView:[[UIApplication sharedApplication] keyWindow]];
     
     CGFloat halfSelectionViewHeight = [[self currentSelectedView] bounds].size.height/2.0f;
     
@@ -218,11 +278,15 @@
             break;
         case UIGestureRecognizerStateBegan:
         {
-            [self currentSelectedView].layer.anchorPoint = CGPointMake(0.5f, 1.0f);
+            self.shouldLoadUserSelectionData = YES;
+            [self.pieChart setCenter:[panGesture locationInView:self]];
+            [self.pieChart reloadData];
         }
+            break;
         case UIGestureRecognizerStateEnded:
         {
-            [self currentSelectedView].layer.anchorPoint = CGPointMake(0.5f, 0.5f);
+            self.shouldLoadUserSelectionData = NO;
+            [self.pieChart reloadData];
             [self currentSelectedView].layer.transform = CATransform3DIdentity;
         }
             break;

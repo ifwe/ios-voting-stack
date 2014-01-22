@@ -34,7 +34,7 @@
 }
 
 - (IBAction)pushFront:(UIButton *)sender {
-    [self.voteView pushFront];
+//    [self.voteView pushFront];
 }
 
 - (NSMutableArray *) arrayOfView
@@ -62,6 +62,16 @@
 
 - (UIView *)votingStack:(VotingStackView *)vsView viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view{
     return [self.arrayOfView objectAtIndex:index];
+}
+
+
+
+- (NSUInteger)votingStack:(VotingStackView *)vsView numberOfSelectionForIndex:(NSUInteger) index{
+    return 4;
+}
+
+- (CGFloat)votingStack:(VotingStackView *)vsView valueForSliceAtIndex:(NSUInteger)index forItem:(NSUInteger) itemIndex{
+    return 25.0f;
 }
 
 @end

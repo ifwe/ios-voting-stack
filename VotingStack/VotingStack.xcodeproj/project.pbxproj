@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7C12E0A6189072C500BE7B28 /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C12E0A5189072C500BE7B28 /* XYPieChart.m */; };
 		7C688FA81884C64F006B576D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C688FA71884C64F006B576D /* Foundation.framework */; };
 		7C688FAA1884C64F006B576D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C688FA91884C64F006B576D /* CoreGraphics.framework */; };
 		7C688FAC1884C64F006B576D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C688FAB1884C64F006B576D /* UIKit.framework */; };
@@ -53,6 +54,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7C12E0A4189072C500BE7B28 /* XYPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPieChart.h; sourceTree = "<group>"; };
+		7C12E0A5189072C500BE7B28 /* XYPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPieChart.m; sourceTree = "<group>"; };
 		7C688FA41884C64F006B576D /* VotingStack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VotingStack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C688FA71884C64F006B576D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7C688FA91884C64F006B576D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -122,6 +125,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7C12E0A3189072C500BE7B28 /* XYPieChart */ = {
+			isa = PBXGroup;
+			children = (
+				7C12E0A4189072C500BE7B28 /* XYPieChart.h */,
+				7C12E0A5189072C500BE7B28 /* XYPieChart.m */,
+			);
+			path = XYPieChart;
+			sourceTree = "<group>";
+		};
 		7C688F9B1884C64F006B576D = {
 			isa = PBXGroup;
 			children = (
@@ -164,6 +176,7 @@
 				7CB7BAAD1889DE25004EBC62 /* iCarousel.m */,
 				7CB7BAAF1889EDC0004EBC62 /* iCarousel+votingStackView.h */,
 				7CB7BAB01889EDC0004EBC62 /* iCarousel+votingStackView.m */,
+				7C12E0A3189072C500BE7B28 /* XYPieChart */,
 			);
 			path = VotingStack;
 			sourceTree = "<group>";
@@ -343,6 +356,7 @@
 				7CB7BAB11889EDC0004EBC62 /* iCarousel+votingStackView.m in Sources */,
 				7C688FB41884C64F006B576D /* main.m in Sources */,
 				7C688FB81884C64F006B576D /* VSAppDelegate.m in Sources */,
+				7C12E0A6189072C500BE7B28 /* XYPieChart.m in Sources */,
 				7C688FE21884C977006B576D /* VotingStackView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

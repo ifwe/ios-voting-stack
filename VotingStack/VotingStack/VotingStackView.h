@@ -17,8 +17,14 @@
 @protocol VotingStackViewDataSource <NSObject>
 @required
 
+// stack proportion
 - (NSUInteger)numberOfItemsInVotingStack:(VotingStackView *)vsView;
 - (UIView *)votingStack:(VotingStackView *)vsView viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view;
+
+
+// selection proportion
+- (NSUInteger)votingStack:(VotingStackView *)vsView numberOfSelectionForIndex:(NSUInteger) index;
+- (CGFloat)votingStack:(VotingStackView *)vsView valueForSliceAtIndex:(NSUInteger)index forItem:(NSUInteger) itemIndex;
 
 @optional
 
@@ -49,7 +55,7 @@
 @property (nonatomic) CGFloat selectionCommitThresholdSquared;
 
 - (void) popFront;
-- (void) pushFront;
+//- (void) pushFront;
 
 @end
 
