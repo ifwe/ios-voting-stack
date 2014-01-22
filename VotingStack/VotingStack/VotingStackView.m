@@ -101,6 +101,20 @@
     return [arrayOfSelectionView lastObject];
 }
 
+
+- (void) selectionIsReadyToCommitWithAngle:(CGFloat) angle
+{
+    
+}
+
+
+#pragma mark - Getter & Setter
+
+- (CGFloat)selectionCommitThresholdSquared
+{
+    return 100.0f*100.0f;
+}
+
 #pragma mark - iCarouselDataSource
 
 - (NSUInteger)numberOfItemsInCarousel:(iCarousel *)carousel{
@@ -171,12 +185,15 @@
 - (void) pan:(UIPanGestureRecognizer *) panGesture
 {
     CGPoint dxPointFromOrigin = [panGesture translationInView:self.SelectionView];
-    CGFloat halfViewHeight = [[self currentSelectedView] bounds].size.height/2.0f;
     
-    dxPointFromOrigin.y = dxPointFromOrigin.y - halfViewHeight;
+    CGPoint locationOnScreen = [panGesture locationInView:[[UIApplication sharedApplication] keyWindow]];
+    
+    CGFloat halfSelectionViewHeight = [[self currentSelectedView] bounds].size.height/2.0f;
+    
+    // offset to the anchor point
+    dxPointFromOrigin.y -= halfSelectionViewHeight;
     
     CGFloat angle = atan2f(dxPointFromOrigin.y, dxPointFromOrigin.x) + M_PI;
-    
     
     
     switch (panGesture.state) {
@@ -186,11 +203,17 @@
 #ifdef VOTING_STACK_DEBUG
             NSLog(@"2: %f, dx=(x=%f, y=%f)", DEGREES(angle), dxPointFromOrigin.x, dxPointFromOrigin.y);
 #endif
-            CATransform3D rotation = CATransform3DMakeTranslation(dxPointFromOrigin.x, dxPointFromOrigin.y+halfViewHeight, 0.0f);
+            CATransform3D translateRotation = CATransform3DMakeTranslation(dxPointFromOrigin.x, dxPointFromOrigin.y+halfSelectionViewHeight, 0.0f);
             
-            rotation = CATransform3DRotate(rotation, angle - M_PI_2, 0, 0, 1);
+            translateRotation = CATransform3DRotate(translateRotation, angle - M_PI_2, 0, 0, 1);
             
-            [self currentSelectedView].layer.transform = rotation;
+            CGFloat SqDistanceFromrOrigin = dxPointFromOrigin.x * dxPointFromOrigin.x + (dxPointFromOrigin.y+halfSelectionViewHeight) * (dxPointFromOrigin.y+halfSelectionViewHeight);
+            
+            if (SqDistanceFromrOrigin > self.selectionCommitThresholdSquared) {
+                [self selectionIsReadyToCommitWithAngle:angle];
+            }
+            
+            [self currentSelectedView].layer.transform = translateRotation;
         }
             break;
         case UIGestureRecognizerStateBegan:

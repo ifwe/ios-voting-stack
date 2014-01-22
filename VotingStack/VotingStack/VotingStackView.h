@@ -46,6 +46,7 @@
 @interface VotingStackView : UIView
 @property (nonatomic, weak) IBOutlet id<VotingStackViewDataSource> dataSource;
 @property (nonatomic, weak) IBOutlet id<VotingStackViewDelegate> delegate;
+@property (nonatomic) CGFloat selectionCommitThresholdSquared;
 
 - (void) popFront;
 - (void) pushFront;
