@@ -64,7 +64,7 @@
         
         
         
-        XYPieChart *pieChartTemp = [[XYPieChart alloc] initWithFrame:_SelectionView.frame Center:_SelectionView.center Radius:100.0f];
+        XYPieChart *pieChartTemp = [[XYPieChart alloc] initWithFrame:_SelectionView.frame Center:_SelectionView.center Radius:sqrtf(self.selectionCommitThresholdSquared)];
         pieChartTemp.dataSource = self;
         pieChartTemp.delegate = self;
         pieChartTemp.userInteractionEnabled = NO;

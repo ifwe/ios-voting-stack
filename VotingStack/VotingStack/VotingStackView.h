@@ -39,7 +39,8 @@
 
 @optional
 
-- (void) votingStack:(VotingStackView *) vsView didSelectionItemAtIndex: (NSInteger) index;
+- (void) votingStack:(VotingStackView *) vsView willSelectionItemAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex;
+- (void) votingStack:(VotingStackView *) vsView didSelectionItemAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex;
 
 @end
 
