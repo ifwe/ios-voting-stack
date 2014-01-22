@@ -31,6 +31,11 @@
 
 @property (nonatomic) BOOL shouldLoadUserSelectionData;
 
+// -1 is cancel. By default currentSelection is -1
+@property (nonatomic) NSInteger currentSelection;
+//
+//@property (nonatomic, strong)
+
 @end
 
 
@@ -71,6 +76,8 @@
         
         _pieChart = pieChartTemp;
         [self addSubview:pieChartTemp];
+        
+        self.currentSelection = -1;
         
     });
 }
@@ -122,9 +129,17 @@
 
 - (void) selectionIsReadyToCommitWithAngle:(CGFloat) angle
 {
-    
 }
 
+
+- (void) shouldShowUserSelectionCategory: (BOOL) shouldShow atTouchPoint: (CGPoint) centerPoint
+{
+    self.shouldLoadUserSelectionData = shouldShow;
+    if (shouldShow) {
+        [self.pieChart setCenter:centerPoint];
+    }
+    [self.pieChart reloadData];
+}
 
 #pragma mark - Getter & Setter
 
@@ -204,7 +219,8 @@
 - (NSUInteger)numberOfSlicesInPieChart:(XYPieChart *)pieChart
 {
     if (self.shouldLoadUserSelectionData) {
-        return [self.dataSource votingStack:self numberOfSelectionForIndex:self.carousel.currentItemIndex];
+        NSUInteger numSlice = [self.dataSource votingStack:self numberOfSelectionForIndex:self.carousel.currentItemIndex];
+        return numSlice;
     }else{
         return 0;
     }
@@ -278,15 +294,12 @@
             break;
         case UIGestureRecognizerStateBegan:
         {
-            self.shouldLoadUserSelectionData = YES;
-            [self.pieChart setCenter:[panGesture locationInView:self]];
-            [self.pieChart reloadData];
+            [self shouldShowUserSelectionCategory:YES atTouchPoint:[panGesture locationInView:self]];
         }
             break;
         case UIGestureRecognizerStateEnded:
         {
-            self.shouldLoadUserSelectionData = NO;
-            [self.pieChart reloadData];
+            [self shouldShowUserSelectionCategory:NO atTouchPoint:[panGesture locationInView:self]];
             [self currentSelectedView].layer.transform = CATransform3DIdentity;
         }
             break;
