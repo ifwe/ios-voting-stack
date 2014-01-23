@@ -7,7 +7,7 @@
 //
 
 #import "VotingStackView.h"
-#import "iCarousel+votingStackView.h"
+#import "iCarousel.h"
 #import "XYPieChart.h"
 
 
