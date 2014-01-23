@@ -21,6 +21,8 @@
 
 
 
+- (NSString *)votingstack:(VotingStackView *)vsView textForSliceAtIndex:(NSUInteger)index atIndex: (NSUInteger) itemIndex{return @"";}
+
 - (void) votingStack:(VotingStackView *) vsView willSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex{}
 - (void) votingStack:(VotingStackView *) vsView didSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex{}
 
@@ -81,6 +83,7 @@
         XYPieChart *pieChartTemp = [[XYPieChart alloc] initWithFrame:_SelectionView.frame Center:_SelectionView.center Radius:sqrtf(self.selectionCommitThresholdSquared)];
         pieChartTemp.dataSource = self;
         pieChartTemp.delegate = self;
+        pieChartTemp.showPercentage = NO;
         pieChartTemp.userInteractionEnabled = NO;
         pieChartTemp.startPieAngle = M_PI;
         
@@ -152,7 +155,7 @@
     
     
     
-    NSInteger newItemSelectionIndex = [self.delegate votingstack:self translateIndexForAngle:DEGREES(angle)];
+    NSInteger newItemSelectionIndex = [self.delegate votingstack:self translateIndexForAngle:DEGREES(angle) atIndex:self.carousel.currentItemIndex];
     
     if (self.currentSelection != newItemSelectionIndex) {
         
@@ -282,6 +285,12 @@
     return [arrColor objectAtIndex:(index % arrColor.count)];
 }
 
+
+
+- (NSString *)pieChart:(XYPieChart *)pieChart textForSliceAtIndex:(NSUInteger)index{
+    return [self.delegate votingstack:self textForSliceAtIndex:index atIndex:self.carousel.currentItemIndex];
+
+}
 
 
 //#pragma mark - XYPieChartDelegate
