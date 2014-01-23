@@ -134,13 +134,15 @@
         return;
     }
     
-    NSInteger newIndex = [self.delegate votingstack:self translateIndexForAngle:DEGREES(angle)];
+    NSInteger newItemSelectionIndex = [self.delegate votingstack:self translateIndexForAngle:DEGREES(angle)];
+    
+    if (self.currentSelection != newItemSelectionIndex) {
+//        [self.delegate votingStack:self willSelectItemAtIndex:self.carousel.currentItemIndex atIndex:newItemSelectionIndex];
         
-    if (self.currentSelection != newIndex) {
         if (self.currentSelection >= 0) {
             [self.pieChart setSliceDeselectedAtIndex:self.currentSelection];
         }
-        self.currentSelection = newIndex;
+        self.currentSelection = newItemSelectionIndex;
         [self.pieChart setSliceSelectedAtIndex:self.currentSelection];
     }
 }
