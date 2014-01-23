@@ -10,9 +10,15 @@
 
 @interface VSViewController () <VotingStackViewDataSource>
 
+@property (nonatomic, strong) NSMutableArray *arrayOfString;
+
 @property (nonatomic, strong) NSMutableArray *arrayOfView;
 
 @property (nonatomic, strong) NSMutableArray *arrayOfSelection;
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *CurrentSelection;
+
+
 @end
 
 @implementation VSViewController
@@ -35,7 +41,6 @@
 }
 
 - (IBAction)pushFront:(UIButton *)sender {
-//    [self.voteView pushFront];
 }
 
 - (NSMutableArray *) arrayOfView
@@ -67,6 +72,16 @@
     }
     return _arrayOfSelection;
 }
+
+
+- (NSMutableArray *)arrayOfString
+{
+    if (!_arrayOfString) {
+        _arrayOfString = [[NSMutableArray alloc] initWithArray:@[@"cat", @"dog", @"bird", @"kid", @"turtle"]];
+    }
+    return _arrayOfString;
+}
+
 #pragma mark - VotingStackViewDataSource
 
 - (NSUInteger)numberOfItemsInVotingStack:(VotingStackView *)vsView{
@@ -91,7 +106,7 @@
 
 
 
-- (NSInteger) votingstack:(VotingStackView *) vsView translateIndexForAngle: (CGFloat) angle{
+- (NSInteger) votingstack:(VotingStackView *) vsView translateIndexForAngle: (CGFloat) angle atIndex:(NSUInteger)itemIndex{
     __block NSInteger index = -1;
     [self.arrayOfSelection enumerateObjectsUsingBlock:^(NSValue *obj, NSUInteger idx, BOOL *stop) {
         if (NSLocationInRange((NSUInteger)angle, [obj rangeValue])){
@@ -103,15 +118,42 @@
 }
 
 
+
+- (NSString *)votingstack:(VotingStackView *)vsView textForSliceAtIndex:(NSUInteger)index atIndex: (NSUInteger) itemIndex{
+    return [self.arrayOfString objectAtIndex:(index % self.arrayOfString.count)];
+}
+
+
+- (UIColor *)votingstack:(VotingStackView *)vsView colorForSliceAtIndex:(NSUInteger)index atIndex: (NSUInteger) itemIndex{
+        NSArray * arrColor = [NSArray arrayWithObjects:
+         [UIColor colorWithRed:246/255.0 green:155/255.0 blue:0/255.0 alpha:0.5f],
+         [UIColor colorWithRed:129/255.0 green:195/255.0 blue:29/255.0 alpha:0.5f],
+         [UIColor colorWithRed:62/255.0 green:173/255.0 blue:219/255.0 alpha:0.5f],
+         [UIColor colorWithRed:229/255.0 green:66/255.0 blue:115/255.0 alpha:0.5f],
+                              [UIColor colorWithRed:148/255.0 green:141/255.0 blue:139/255.0 alpha:0.5f],nil];
+        return [arrColor objectAtIndex:(index % arrColor.count)];
+}
+
+
 - (void) votingStack:(VotingStackView *) vsView willSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex{
     NSLog(@"%@, %d", NSStringFromSelector(_cmd), index);
 }
 
 - (void) votingStack:(VotingStackView *) vsView didSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex{
     NSLog(@"%@, %d", NSStringFromSelector(_cmd), index);
-    [self.voteView popFront];
-//    [self.arrayOfView removeObjectAtIndex:itemIndex];
+    if (index != -1) {
+        NSString * selection = [self.arrayOfString objectAtIndex:(index % self.arrayOfString.count)];
+        
+        [[[UIAlertView alloc] initWithTitle:@"This person got a" message:selection delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil] show];
+        
+        [self.voteView popFront];
+    }
 }
+
+
+
+
+
 
 
 @end

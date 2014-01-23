@@ -12,4 +12,6 @@
 @interface VSViewController : UIViewController <VotingStackViewDataSource>
 @property (weak, nonatomic) IBOutlet VotingStackView *voteView;
 
+@property (weak, nonatomic) IBOutlet UILabel *selectionIndex;
+
 @end
