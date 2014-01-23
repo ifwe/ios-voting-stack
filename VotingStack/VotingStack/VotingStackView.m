@@ -190,7 +190,9 @@
 }
 
 - (UIView *)carousel:(iCarousel *)carousel viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view{
-    return [self.dataSource votingStack:self viewForItemAtIndex:index reusingView:view];
+    UIView * theView = [self.dataSource votingStack:self viewForItemAtIndex:index reusingView:view];
+    theView.layer.opacity = 1.0f;
+    return theView;
 }
 
 
@@ -220,14 +222,8 @@
         
         currentView.layer.opacity = 0.0f;
         
-//        CGRect restoringFrame = currentView.frame;
-//        restoringFrame.origin = CGPointZero;
-//        currentView.frame = restoringFrame;
-        
         [currentView removeFromSuperview];
         
-//        [self.oldCarouselContainerView addSubview:currentView];
-
     }
 }
 
