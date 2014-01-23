@@ -18,6 +18,7 @@
                                 <color key="backgroundColor" white="1" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="vXZ-lx-hvc" id="OkD-9D-7Zb"/>
+                                    <outlet property="delegate" destination="vXZ-lx-hvc" id="hy2-Ge-mNY"/>
                                 </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KLl-Ks-Vec">

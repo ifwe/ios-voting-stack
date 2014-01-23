@@ -20,7 +20,6 @@
 
 @property (nonatomic, weak) iCarousel *carousel;
 
-
 @property (nonatomic, weak) UIView *oldCarouselContainerView;
 
 @property (nonatomic, weak) UIView *SelectionView;
@@ -73,6 +72,7 @@
         pieChartTemp.dataSource = self;
         pieChartTemp.delegate = self;
         pieChartTemp.userInteractionEnabled = NO;
+        pieChartTemp.startPieAngle = M_PI;
         
         _pieChart = pieChartTemp;
         [self addSubview:pieChartTemp];
@@ -127,9 +127,20 @@
 }
 
 
-- (void) selectionIsReadyToCommitWithAngle:(CGFloat) angle
+- (void) selectionShouldCommit:(BOOL) shouldCommit WithAngle:(CGFloat) angle
 {
+    NSInteger newIndex = [self.delegate votingstack:self translateIndexForAngle:DEGREES(angle)];
+    
+    if (self.currentSelection != newIndex) {
+        [self.pieChart setSliceDeselectedAtIndex:self.currentSelection];
+        self.currentSelection = shouldCommit? newIndex : -1;
+#ifdef VOTING_STACK_DEBUG
+        NSLog(@"%d", newIndex);
+#endif
+        [self.pieChart setSliceSelectedAtIndex:self.currentSelection];
+    }
 }
+
 
 
 - (void) shouldShowUserSelectionCategory: (BOOL) shouldShow atTouchPoint: (CGPoint) centerPoint
@@ -266,10 +277,13 @@
     
     CGFloat halfSelectionViewHeight = [[self currentSelectedView] bounds].size.height/2.0f;
     
-    // offset to the anchor point
+    
+    CGFloat angleFromLastTouchPoint = atan2f(dxPointFromOrigin.y, dxPointFromOrigin.x) + M_PI;
+    
+    // offset to the bottom point
     dxPointFromOrigin.y -= halfSelectionViewHeight;
     
-    CGFloat angle = atan2f(dxPointFromOrigin.y, dxPointFromOrigin.x) + M_PI;
+    CGFloat angleFromCardBottomEdge = atan2f(dxPointFromOrigin.y, dxPointFromOrigin.x) + M_PI;
     
     
     switch (panGesture.state) {
@@ -277,17 +291,15 @@
         {
             
 #ifdef VOTING_STACK_DEBUG
-            NSLog(@"2: %f, dx=(x=%f, y=%f)", DEGREES(angle), dxPointFromOrigin.x, dxPointFromOrigin.y);
+            NSLog(@"2: %f, dx=(x=%f, y=%f)", DEGREES(angleFromCardBottomEdge), dxPointFromOrigin.x, dxPointFromOrigin.y);
 #endif
             CATransform3D translateRotation = CATransform3DMakeTranslation(dxPointFromOrigin.x, dxPointFromOrigin.y+halfSelectionViewHeight, 0.0f);
             
-            translateRotation = CATransform3DRotate(translateRotation, angle - M_PI_2, 0, 0, 1);
+            translateRotation = CATransform3DRotate(translateRotation, angleFromCardBottomEdge - M_PI_2, 0, 0, 1);
             
             CGFloat SqDistanceFromrOrigin = dxPointFromOrigin.x * dxPointFromOrigin.x + (dxPointFromOrigin.y+halfSelectionViewHeight) * (dxPointFromOrigin.y+halfSelectionViewHeight);
             
-            if (SqDistanceFromrOrigin > self.selectionCommitThresholdSquared) {
-                [self selectionIsReadyToCommitWithAngle:angle];
-            }
+            [self selectionShouldCommit:(SqDistanceFromrOrigin > self.selectionCommitThresholdSquared) WithAngle:angleFromLastTouchPoint];
             
             [self currentSelectedView].layer.transform = translateRotation;
         }

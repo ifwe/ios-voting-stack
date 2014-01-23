@@ -12,6 +12,7 @@
 
 @property (nonatomic, strong) NSMutableArray *arrayOfView;
 
+@property (nonatomic, strong) NSMutableArray *arrayOfSelection;
 @end
 
 @implementation VSViewController
@@ -53,6 +54,18 @@
     return _arrayOfView;
 }
 
+
+- (NSMutableArray *)arrayOfSelection
+{
+    if (!_arrayOfSelection) {
+        _arrayOfSelection = [NSMutableArray new];
+        [_arrayOfSelection addObject:[NSValue valueWithRange:NSMakeRange(0, 90)]];
+        [_arrayOfSelection addObject:[NSValue valueWithRange:NSMakeRange(90, 90)]];
+        [_arrayOfSelection addObject:[NSValue valueWithRange:NSMakeRange(180, 90)]];
+        [_arrayOfSelection addObject:[NSValue valueWithRange:NSMakeRange(270, 90)]];
+    }
+    return _arrayOfSelection;
+}
 #pragma mark - VotingStackViewDataSource
 
 - (NSUInteger)numberOfItemsInVotingStack:(VotingStackView *)vsView{
@@ -67,11 +80,26 @@
 
 
 - (NSUInteger)votingStack:(VotingStackView *)vsView numberOfSelectionForIndex:(NSUInteger) index{
-    return 4;
+    return self.arrayOfSelection.count;
 }
 
 - (CGFloat)votingStack:(VotingStackView *)vsView valueForSliceAtIndex:(NSUInteger)index forItem:(NSUInteger) itemIndex{
-    return 25.0f;
+    NSRange theRange = [self.arrayOfSelection[itemIndex] rangeValue];
+    return theRange.length;
 }
+
+
+
+- (NSInteger) votingstack:(VotingStackView *) vsView translateIndexForAngle: (CGFloat) angle{
+    __block NSInteger index = -1;
+    [self.arrayOfSelection enumerateObjectsUsingBlock:^(NSValue *obj, NSUInteger idx, BOOL *stop) {
+        if (NSLocationInRange((NSUInteger)angle, [obj rangeValue])){
+            index = (NSInteger)idx;
+            *stop = YES;
+        }
+    }];
+    return index;
+}
+
 
 @end
