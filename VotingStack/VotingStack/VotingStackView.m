@@ -144,9 +144,13 @@
         if (self.currentSelection >= 0) {
             [self.pieChart setSliceDeselectedAtIndex:self.currentSelection];
             self.currentSelection = -1;
+            [self.delegate votingStack:self willSelectChoiceAtIndex:self.currentSelection
+                               atIndex:self.carousel.currentItemIndex];
         }
         return;
     }
+    
+    
     
     NSInteger newItemSelectionIndex = [self.delegate votingstack:self translateIndexForAngle:DEGREES(angle)];
     
@@ -335,10 +339,8 @@
         {
             [self shouldShowUserSelectionCategory:NO atTouchPoint:[panGesture locationInView:self]];
             [self currentSelectedView].layer.transform = CATransform3DIdentity;
-            if (self.currentSelection >=0) {
-                [self.delegate votingStack:self didSelectChoiceAtIndex:self.currentSelection
-                                   atIndex:self.carousel.currentItemIndex];
-            }
+            [self.delegate votingStack:self didSelectChoiceAtIndex:self.currentSelection
+                               atIndex:self.carousel.currentItemIndex];
         }
             break;
         default:
