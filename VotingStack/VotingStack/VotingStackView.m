@@ -55,9 +55,6 @@
         _carousel = car;
         [self addSubview:_carousel];
         
-        
-        
-        
         UIView * selectionTempView = [[UIView alloc] initWithFrame:self.bounds];
         selectionTempView.userInteractionEnabled = YES;
         
@@ -129,14 +126,21 @@
 
 - (void) selectionShouldCommit:(BOOL) shouldCommit WithAngle:(CGFloat) angle
 {
-    NSInteger newIndex = [self.delegate votingstack:self translateIndexForAngle:DEGREES(angle)];
+    if (!shouldCommit) {
+        if (self.currentSelection >= 0) {
+            [self.pieChart setSliceDeselectedAtIndex:self.currentSelection];
+            self.currentSelection = -1;
+        }
+        return;
+    }
     
+    NSInteger newIndex = [self.delegate votingstack:self translateIndexForAngle:DEGREES(angle)];
+        
     if (self.currentSelection != newIndex) {
-        [self.pieChart setSliceDeselectedAtIndex:self.currentSelection];
-        self.currentSelection = shouldCommit? newIndex : -1;
-#ifdef VOTING_STACK_DEBUG
-        NSLog(@"%d", newIndex);
-#endif
+        if (self.currentSelection >= 0) {
+            [self.pieChart setSliceDeselectedAtIndex:self.currentSelection];
+        }
+        self.currentSelection = newIndex;
         [self.pieChart setSliceSelectedAtIndex:self.currentSelection];
     }
 }
@@ -203,7 +207,6 @@
         [currentView removeFromSuperview];
         
         [self.oldCarouselContainerView addSubview:currentView];
-        
 
     }
 }
@@ -296,12 +299,15 @@
             CATransform3D translateRotation = CATransform3DMakeTranslation(dxPointFromOrigin.x, dxPointFromOrigin.y+halfSelectionViewHeight, 0.0f);
             
             translateRotation = CATransform3DRotate(translateRotation, angleFromCardBottomEdge - M_PI_2, 0, 0, 1);
+            [self currentSelectedView].layer.transform = translateRotation;
+            
+            
+            
             
             CGFloat SqDistanceFromrOrigin = dxPointFromOrigin.x * dxPointFromOrigin.x + (dxPointFromOrigin.y+halfSelectionViewHeight) * (dxPointFromOrigin.y+halfSelectionViewHeight);
             
             [self selectionShouldCommit:(SqDistanceFromrOrigin > self.selectionCommitThresholdSquared) WithAngle:angleFromLastTouchPoint];
             
-            [self currentSelectedView].layer.transform = translateRotation;
         }
             break;
         case UIGestureRecognizerStateBegan:

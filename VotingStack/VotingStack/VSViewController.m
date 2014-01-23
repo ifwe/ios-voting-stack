@@ -62,7 +62,8 @@
         [_arrayOfSelection addObject:[NSValue valueWithRange:NSMakeRange(0, 90)]];
         [_arrayOfSelection addObject:[NSValue valueWithRange:NSMakeRange(90, 90)]];
         [_arrayOfSelection addObject:[NSValue valueWithRange:NSMakeRange(180, 90)]];
-        [_arrayOfSelection addObject:[NSValue valueWithRange:NSMakeRange(270, 90)]];
+        [_arrayOfSelection addObject:[NSValue valueWithRange:NSMakeRange(270, 30)]];
+        [_arrayOfSelection addObject:[NSValue valueWithRange:NSMakeRange(300, 60)]];
     }
     return _arrayOfSelection;
 }
@@ -84,7 +85,7 @@
 }
 
 - (CGFloat)votingStack:(VotingStackView *)vsView valueForSliceAtIndex:(NSUInteger)index forItem:(NSUInteger) itemIndex{
-    NSRange theRange = [self.arrayOfSelection[itemIndex] rangeValue];
+    NSRange theRange = [self.arrayOfSelection[index] rangeValue];
     return theRange.length;
 }
 

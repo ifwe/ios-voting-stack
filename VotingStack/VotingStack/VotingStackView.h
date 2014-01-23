@@ -37,9 +37,11 @@
 
 @protocol VotingStackViewDelegate <NSObject>
 
+@required
+- (NSInteger) votingstack:(VotingStackView *) vsView translateIndexForAngle: (CGFloat) angle;
+
 @optional
 
-- (NSInteger) votingstack:(VotingStackView *) vsView translateIndexForAngle: (CGFloat) angle;
 - (void) votingStack:(VotingStackView *) vsView willSelectionItemAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex;
 - (void) votingStack:(VotingStackView *) vsView didSelectionItemAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex;
 
