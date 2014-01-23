@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <CoreMotion/CoreMotion.h>
 
-#define VOTING_STACK_DEBUG (YES)
+//#define VOTING_STACK_DEBUG (YES)
 
 
 @class VotingStackView;
@@ -42,8 +42,8 @@
 
 @optional
 
-- (void) votingStack:(VotingStackView *) vsView willSelectItemAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex;
-- (void) votingStack:(VotingStackView *) vsView didSelectItemAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex;
+- (void) votingStack:(VotingStackView *) vsView willSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex;
+- (void) votingStack:(VotingStackView *) vsView didSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex;
 
 @end
 

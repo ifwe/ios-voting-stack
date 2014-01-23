@@ -11,9 +11,22 @@
 #import "XYPieChart.h"
 
 
+
 #pragma mark - Macros
 #define RADIANS(deg)  ((deg) * M_PI / 180)
 #define DEGREES(rad)  ((rad) * 180 / M_PI)
+
+
+@implementation NSObject (VotingStackView)
+
+
+
+- (void) votingStack:(VotingStackView *) vsView willSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex{}
+- (void) votingStack:(VotingStackView *) vsView didSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex{}
+
+
+@end
+
 
 
 @interface VotingStackView () <iCarouselDataSource, iCarouselDelegate, XYPieChartDataSource, XYPieChartDelegate>
@@ -108,6 +121,7 @@
         [self.carousel itemViewAtIndex:self.carousel.currentItemIndex].layer.opacity = 0.0f;
         [self.carousel scrollToItemAtIndex:self.carousel.currentItemIndex+1 animated:YES];
     }
+//    [self.carousel reloadData];
 }
 
 - (void) pushFront
@@ -137,13 +151,17 @@
     NSInteger newItemSelectionIndex = [self.delegate votingstack:self translateIndexForAngle:DEGREES(angle)];
     
     if (self.currentSelection != newItemSelectionIndex) {
-//        [self.delegate votingStack:self willSelectItemAtIndex:self.carousel.currentItemIndex atIndex:newItemSelectionIndex];
+        
+        [self.delegate votingStack:self willSelectChoiceAtIndex:newItemSelectionIndex
+                           atIndex:self.carousel.currentItemIndex];
         
         if (self.currentSelection >= 0) {
             [self.pieChart setSliceDeselectedAtIndex:self.currentSelection];
         }
         self.currentSelection = newItemSelectionIndex;
-        [self.pieChart setSliceSelectedAtIndex:self.currentSelection];
+        if (self.currentSelection >= 0) {
+            [self.pieChart setSliceSelectedAtIndex:self.currentSelection];
+        }
     }
 }
 
@@ -202,13 +220,13 @@
         
         currentView.layer.opacity = 0.0f;
         
-        CGRect restoringFrame = currentView.frame;
-        restoringFrame.origin = CGPointZero;
-        currentView.frame = restoringFrame;
+//        CGRect restoringFrame = currentView.frame;
+//        restoringFrame.origin = CGPointZero;
+//        currentView.frame = restoringFrame;
         
         [currentView removeFromSuperview];
         
-        [self.oldCarouselContainerView addSubview:currentView];
+//        [self.oldCarouselContainerView addSubview:currentView];
 
     }
 }
@@ -321,6 +339,10 @@
         {
             [self shouldShowUserSelectionCategory:NO atTouchPoint:[panGesture locationInView:self]];
             [self currentSelectedView].layer.transform = CATransform3DIdentity;
+            if (self.currentSelection >=0) {
+                [self.delegate votingStack:self didSelectChoiceAtIndex:self.currentSelection
+                                   atIndex:self.carousel.currentItemIndex];
+            }
         }
             break;
         default:

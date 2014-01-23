@@ -103,4 +103,15 @@
 }
 
 
+- (void) votingStack:(VotingStackView *) vsView willSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex{
+    NSLog(@"%@, %d", NSStringFromSelector(_cmd), index);
+}
+
+- (void) votingStack:(VotingStackView *) vsView didSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex{
+    NSLog(@"%@, %d", NSStringFromSelector(_cmd), index);
+    [self.voteView popFront];
+//    [self.arrayOfView removeObjectAtIndex:itemIndex];
+}
+
+
 @end
