@@ -23,6 +23,15 @@
 
 - (NSString *)votingstack:(VotingStackView *)vsView textForSliceAtIndex:(NSUInteger)index atIndex: (NSUInteger) itemIndex{return @"";}
 
+- (UIColor *)votingstack:(VotingStackView *)vsView colorForSliceAtIndex:(NSUInteger)index atIndex: (NSUInteger) itemIndex{
+    CGFloat randomBase = arc4random() % 74;
+    CGFloat topNum = ((CGFloat)(arc4random() % (NSInteger)randomBase));
+    return [UIColor colorWithHue:topNum/randomBase
+                      saturation:topNum/randomBase
+                      brightness:topNum/randomBase
+                           alpha:0.5];
+};
+
 - (void) votingStack:(VotingStackView *) vsView willSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex{}
 - (void) votingStack:(VotingStackView *) vsView didSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex{}
 
@@ -276,13 +285,7 @@
 
 - (UIColor *)pieChart:(XYPieChart *)pieChart colorForSliceAtIndex:(NSUInteger)index
 {
-    NSArray * arrColor = [NSArray arrayWithObjects:
-     [UIColor colorWithRed:246/255.0 green:155/255.0 blue:0/255.0 alpha:0.5f],
-     [UIColor colorWithRed:129/255.0 green:195/255.0 blue:29/255.0 alpha:0.5f],
-     [UIColor colorWithRed:62/255.0 green:173/255.0 blue:219/255.0 alpha:0.5f],
-     [UIColor colorWithRed:229/255.0 green:66/255.0 blue:115/255.0 alpha:0.5f],
-                          [UIColor colorWithRed:148/255.0 green:141/255.0 blue:139/255.0 alpha:0.5f],nil];
-    return [arrColor objectAtIndex:(index % arrColor.count)];
+    return [self.delegate votingstack:self colorForSliceAtIndex:index atIndex:self.carousel.currentItemIndex];
 }
 
 
