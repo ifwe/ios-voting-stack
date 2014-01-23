@@ -137,16 +137,16 @@
 
 
 - (void) votingStack:(VotingStackView *) vsView willSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex{
-    NSLog(@"%@, %d", NSStringFromSelector(_cmd), index);
+//    NSLog(@"%@, %d", NSStringFromSelector(_cmd), index);
     self.selectionIndex.text = [NSString stringWithFormat:@"%d", index];
 }
 
 - (void) votingStack:(VotingStackView *) vsView didSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex{
-    NSLog(@"%@, %d", NSStringFromSelector(_cmd), index);
+//    NSLog(@"%@, %d", NSStringFromSelector(_cmd), index);
     if (index != -1) {
         NSString * selection = [self.arrayOfString objectAtIndex:(index % self.arrayOfString.count)];
         
-        [[[UIAlertView alloc] initWithTitle:@"This person got a" message:selection delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil] show];
+        [[[UIAlertView alloc] initWithTitle:@"Last person got a" message:selection delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil] show];
         
         [self.voteView popFront];
     }

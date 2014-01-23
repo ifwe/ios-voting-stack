@@ -17,12 +17,12 @@
 @protocol VotingStackViewDataSource <NSObject>
 @required
 
-// stack proportion
+// stack portion
 - (NSUInteger)numberOfItemsInVotingStack:(VotingStackView *)vsView;
 - (UIView *)votingStack:(VotingStackView *)vsView viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view;
 
 
-// selection proportion
+// selection portion
 - (NSUInteger)votingStack:(VotingStackView *)vsView numberOfSelectionForIndex:(NSUInteger) index;
 - (CGFloat)votingStack:(VotingStackView *)vsView valueForSliceAtIndex:(NSUInteger)index forItem:(NSUInteger) itemIndex;
 
@@ -61,8 +61,12 @@
 
 
 @interface VotingStackView : UIView
+
 @property (nonatomic, weak) IBOutlet id<VotingStackViewDataSource> dataSource;
+
 @property (nonatomic, weak) IBOutlet id<VotingStackViewDelegate> delegate;
+
+// the radius of the pie, squared.
 @property (nonatomic) CGFloat selectionCommitThresholdSquared;
 
 - (void) popFront;
