@@ -22,6 +22,8 @@
 
 @property (nonatomic, strong) UIAlertView *alertBox;
 
+@property (nonatomic) BOOL shouldDisablePopup;
+
 @end
 
 @implementation VSViewController
@@ -30,6 +32,7 @@
 {
     [super viewDidLoad];
     self.voteView.backgroundColor = [UIColor grayColor];
+    self.shouldDisablePopup = NO;
 	// Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -48,9 +51,16 @@
     sender.title = self.voteView.shouldShowSelectionPie?@"pie: visible":@"pie: invisible";
 }
 
+- (IBAction)disablePopup:(UIBarButtonItem *)sender {
+    self.shouldDisablePopup = !self.shouldDisablePopup;
+    sender.title = self.shouldDisablePopup?(@"EnablePopup"):(@"DisablePopup");
+}
 
 - (UIAlertView *)alertBox
 {
+    if (self.shouldDisablePopup) {
+        return nil;
+    }
     if (!_alertBox) {
         _alertBox = [[UIAlertView alloc] initWithTitle:@"Last person got a" message:@"" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
     }
