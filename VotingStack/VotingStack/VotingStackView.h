@@ -69,6 +69,8 @@
 // the radius of the pie, squared.
 @property (nonatomic) CGFloat selectionCommitThresholdSquared;
 
+@property (nonatomic) BOOL shouldWrap;
+
 - (void) popFront;
 //- (void) pushFront;
 

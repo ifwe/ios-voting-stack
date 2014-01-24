@@ -41,6 +41,11 @@
                                             <action selector="stepForward:" destination="vXZ-lx-hvc" id="7mH-nB-jo4"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem title="warp: ON" id="BFE-XR-Qgn">
+                                        <connections>
+                                            <action selector="shouldWarp:" destination="vXZ-lx-hvc" id="nu7-BT-9gn"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="zyO-TV-A0B">

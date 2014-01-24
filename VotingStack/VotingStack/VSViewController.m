@@ -47,9 +47,9 @@
 {
     if (!_arrayOfView) {
         _arrayOfView = [[NSMutableArray alloc] init];
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < 5; i++) {
             
-            NSString *imgName = [NSString stringWithFormat:@"img %d", (i % 12)];
+            NSString *imgName = [NSString stringWithFormat:@"img %d", (i % 5)];
             UIImageView * imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imgName]];
             imgView.frame = CGRectMake(0, 0, 200, 250);
             
@@ -59,6 +59,10 @@
     return _arrayOfView;
 }
 
+- (IBAction)shouldWarp:(UIBarButtonItem *)sender {
+    self.voteView.shouldWrap = !self.voteView.shouldWrap;
+    sender.title = self.voteView.shouldWrap?@"warp: ON":@"warp: OFF";
+}
 
 - (NSMutableArray *)arrayOfSelection
 {

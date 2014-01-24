@@ -46,6 +46,8 @@
 
 @property (nonatomic, weak) UIView *oldCarouselContainerView;
 
+@property (nonatomic) BOOL shouldShowLastItemAgain;
+
 @property (nonatomic, weak) UIView *SelectionView;
 
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
@@ -56,8 +58,6 @@
 
 // -1 is cancel. By default currentSelection is -1
 @property (nonatomic) NSInteger currentSelection;
-//
-//@property (nonatomic, strong)
 
 @end
 
@@ -75,7 +75,8 @@
         car.dataSource = self;
         car.delegate = self;
         car.userInteractionEnabled = NO;
-        
+        _shouldWrap = YES;
+        _shouldShowLastItemAgain = YES;
         _carousel = car;
         [self addSubview:_carousel];
         
@@ -133,8 +134,8 @@
         [self.carousel itemViewAtIndex:self.carousel.currentItemIndex].layer.opacity = 0.0f;
         [self.carousel scrollToItemAtIndex:self.carousel.currentItemIndex+1 animated:YES];
     }
-//    [self.carousel reloadData];
 }
+
 
 - (void) pushFront
 {
@@ -192,11 +193,54 @@
     [self.pieChart reloadData];
 }
 
+- (void) borrowTopMostViewFromCarousel
+{
+    UIView * topView = [self.carousel itemViewAtIndex:self.carousel.currentItemIndex];
+    topView.frame = topView.superview.frame;
+    topView.layer.opacity = 1.0f;
+    topView.userInteractionEnabled = YES;
+    
+    [topView addGestureRecognizer:self.panGesture];
+    
+    self.oldCarouselContainerView = topView.superview;
+    
+    [self.SelectionView addSubview:topView];
+}
+
+- (void) restoreTopMostViewFromCarousel
+{
+    if ([self.SelectionView.subviews count]!= 0) {
+        UIView * view = [self currentSelectedView];
+        
+        [view removeGestureRecognizer:self.panGesture];
+        view.layer.opacity = 0.0f;
+        view.frame = view.bounds;
+        [view removeFromSuperview];
+        
+        [self.oldCarouselContainerView addSubview:view];
+    }
+}
+
+
 #pragma mark - Getter & Setter
 
 - (CGFloat)selectionCommitThresholdSquared
 {
     return 100.0f*100.0f;
+}
+
+
+
+- (void)setShouldWrap:(BOOL)shouldWrap
+{
+    [self restoreTopMostViewFromCarousel];
+    
+    _shouldWrap = shouldWrap;
+    [self.carousel reloadData];
+    
+    [self borrowTopMostViewFromCarousel];
+    
+    
 }
 
 #pragma mark - iCarouselDataSource
@@ -220,42 +264,52 @@
         case iCarouselOptionSpacing:
             return 1.8f;
         case iCarouselOptionWrap:
-            return YES;
+            return self.shouldWrap;
         default:
             return value;
     }
 }
 
+- (NSUInteger)numberOfPlaceholdersInCarousel:(iCarousel *)carousel
+{
+    //note: placeholder views are only displayed on some carousels if wrapping is disabled
+    return 2;
+}
+
+
+- (UIView *)carousel:(iCarousel *)carousel placeholderViewAtIndex:(NSUInteger)index reusingView:(UIView *)view
+{
+    UIView * placeholderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 250)];
+    UILabel *label = [[UILabel alloc] initWithFrame:placeholderView.frame];
+    label.textAlignment = NSTextAlignmentCenter;
+    label.text = @"End";
+    [placeholderView addSubview:label];
+    return placeholderView;
+}
+
+
 #pragma mark - iCarouselDelegate
 
 - (void)carouselWillBeginScrollingAnimation:(iCarousel *)carousel
 {
-    if ([[self.SelectionView subviews] count] != 0) {
-        
-        UIView * currentView = [self currentSelectedView];
-        
-        [currentView removeGestureRecognizer:self.panGesture];
-        
-        currentView.layer.opacity = 0.0f;
-        
-        [currentView removeFromSuperview];
-        
-    }
+    [self restoreTopMostViewFromCarousel];
 }
 
 
 - (void)carouselDidEndScrollingAnimation:(iCarousel *)carousel
 {
-    UIView * topView = [self.carousel itemViewAtIndex:self.carousel.currentItemIndex];
-    topView.frame = topView.superview.frame;
-    topView.layer.opacity = 1.0f;
-    topView.userInteractionEnabled = YES;
-    
-    [topView addGestureRecognizer:self.panGesture];
-    
-    self.oldCarouselContainerView = topView.superview;
-    
-    [self.SelectionView addSubview:topView];
+    if (!self.carousel.isWrapEnabled &&
+        (self.carousel.currentItemIndex +1 == self.carousel.numberOfItems)) {
+        if (self.shouldShowLastItemAgain) {
+            self.shouldShowLastItemAgain = NO;
+        }else{
+            return;
+        }
+        [self borrowTopMostViewFromCarousel];
+    } else {
+        self.shouldShowLastItemAgain = YES;
+        [self borrowTopMostViewFromCarousel];
+    }
 }
 
 
@@ -267,7 +321,7 @@
     if (self.shouldLoadUserSelectionData) {
         NSUInteger numSlice = [self.dataSource votingStack:self numberOfSelectionForIndex:self.carousel.currentItemIndex];
         return numSlice;
-    }else{
+    } else {
         return 0;
     }
 }
