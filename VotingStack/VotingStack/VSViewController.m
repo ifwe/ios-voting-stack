@@ -18,6 +18,7 @@
 
 @property (weak, nonatomic) IBOutlet UIBarButtonItem *CurrentSelection;
 
+@property (nonatomic, strong) UIAlertView *alertBox;
 
 @end
 
@@ -40,7 +41,18 @@
     [self.voteView popFront];
 }
 
-- (IBAction)pushFront:(UIButton *)sender {
+- (IBAction)togglePie:(UIBarButtonItem *)sender {
+    self.voteView.shouldShowSelectionPie = !self.voteView.shouldShowSelectionPie;
+    sender.title = self.voteView.shouldShowSelectionPie?@"pie: visible":@"pie: invisible";
+}
+
+
+- (UIAlertView *)alertBox
+{
+    if (!_alertBox) {
+        _alertBox = [[UIAlertView alloc] initWithTitle:@"Last person got a" message:@"" delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+    }
+    return _alertBox;
 }
 
 - (NSMutableArray *) arrayOfView
@@ -143,6 +155,7 @@
 - (void) votingStack:(VotingStackView *) vsView willSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex{
 //    NSLog(@"%@, %d", NSStringFromSelector(_cmd), index);
     self.selectionIndex.text = [NSString stringWithFormat:@"%d", index];
+    self.currentSelectionCategory.text = (index <0)?@"Cancel":self.arrayOfString[index%self.arrayOfString.count];
 }
 
 - (void) votingStack:(VotingStackView *) vsView didSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex{
@@ -150,7 +163,8 @@
     if (index != -1) {
         NSString * selection = [self.arrayOfString objectAtIndex:(index % self.arrayOfString.count)];
         
-        [[[UIAlertView alloc] initWithTitle:@"Last person got a" message:selection delegate:nil cancelButtonTitle:@"Ok" otherButtonTitles: nil] show];
+        [self.alertBox setMessage:selection];
+        [self.alertBox show];
         
         [self.voteView popFront];
     }

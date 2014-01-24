@@ -14,4 +14,6 @@
 
 @property (weak, nonatomic) IBOutlet UILabel *selectionIndex;
 
+@property (weak, nonatomic) IBOutlet UILabel *currentSelectionCategory;
+
 @end

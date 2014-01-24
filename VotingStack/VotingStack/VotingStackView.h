@@ -71,6 +71,8 @@
 
 @property (nonatomic) BOOL shouldWrap;
 
+@property (nonatomic) BOOL shouldShowSelectionPie;
+
 - (void) popFront;
 //- (void) pushFront;
 

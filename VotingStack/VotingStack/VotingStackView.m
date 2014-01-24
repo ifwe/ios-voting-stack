@@ -239,8 +239,12 @@
     [self.carousel reloadData];
     
     [self borrowTopMostViewFromCarousel];
-    
-    
+}
+
+- (void)setShouldShowSelectionPie:(BOOL)shouldShowSelectionPie
+{
+    _shouldShowSelectionPie = shouldShowSelectionPie;
+    self.pieChart.layer.opacity = (_shouldShowSelectionPie)?1.0f:0.0f;
 }
 
 #pragma mark - iCarouselDataSource
@@ -386,9 +390,6 @@
             
             translateRotation = CATransform3DRotate(translateRotation, angleFromCardBottomEdge - M_PI_2, 0, 0, 1);
             [self currentSelectedView].layer.transform = translateRotation;
-            
-            
-            
             
             CGFloat SqDistanceFromrOrigin = dxPointFromOrigin.x * dxPointFromOrigin.x + (dxPointFromOrigin.y+halfSelectionViewHeight) * (dxPointFromOrigin.y+halfSelectionViewHeight);
             

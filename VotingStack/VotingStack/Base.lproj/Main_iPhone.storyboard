@@ -21,17 +21,6 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="hy2-Ge-mNY"/>
                                 </connections>
                             </view>
-                            <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="j8n-e7-E3S">
-                                <rect key="frame" x="207" y="20" width="113" height="39"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                <state key="normal" title="pushFront">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="pushFront:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="Csj-F6-fWp"/>
-                                </connections>
-                            </button>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="hhB-0j-rgh">
                                 <rect key="frame" x="0.0" y="436" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -52,7 +41,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <items>
-                                    <barButtonItem title="Item" id="P86-VV-g2Y"/>
+                                    <barButtonItem title="pie: visible" id="P86-VV-g2Y">
+                                        <connections>
+                                            <action selector="togglePie:" destination="vXZ-lx-hvc" id="vfL-oO-AV8"/>
+                                        </connections>
+                                    </barButtonItem>
                                 </items>
                             </toolbar>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Will select: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ybc-yS-SHg">
@@ -68,11 +61,19 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cancel" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="YCV-4r-8ew">
+                                <rect key="frame" x="182" y="44" width="138" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <connections>
                         <outlet property="CurrentSelection" destination="P86-VV-g2Y" id="Tq3-wh-GSe"/>
+                        <outlet property="currentSelection" destination="YCV-4r-8ew" id="iay-lF-lnd"/>
+                        <outlet property="currentSelectionCategory" destination="YCV-4r-8ew" id="4Eb-HG-oC7"/>
                         <outlet property="selectionIndex" destination="ZgP-Dh-hFu" id="ifM-p3-y0D"/>
                         <outlet property="voteView" destination="rjH-pH-ttW" id="NH1-JS-Y3f"/>
                     </connections>
