@@ -75,6 +75,10 @@
 
 @property (nonatomic, readonly) UIView *currentSelectionView;
 
+@property (nonatomic) CGFloat votingStackTiltOption;
+
+@property (nonatomic) CGFloat votingStackSpacingOption;
+
 - (void) popFront;
 //- (void) pushFront;
 

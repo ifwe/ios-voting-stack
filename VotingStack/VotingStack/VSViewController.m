@@ -75,7 +75,7 @@
             
             NSString *imgName = [NSString stringWithFormat:@"img %d", (i % 5)];
             UIImageView * imgView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:imgName]];
-            imgView.frame = CGRectMake(0, 0, 200, 250);
+            imgView.frame = CGRectMake(0, 0, 250, 300);
             
             [_arrayOfView addObject:imgView];
         }
@@ -178,8 +178,9 @@
     
     UILabel * label = (UILabel *)[self.voteView.currentSelectionView viewWithTag:MAGIC_TAG];
     if (!label) {
-        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 250)];
-        label.textAlignment = NSTextAlignmentCenter;
+        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 250, 300)];
+        label.textAlignment = NSTextAlignmentRight;
+        label.font = [label.font fontWithSize:25.0f];
         label.tag = MAGIC_TAG;
         [self.voteView.currentSelectionView addSubview:label];
     }

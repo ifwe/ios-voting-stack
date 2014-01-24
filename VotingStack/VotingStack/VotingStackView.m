@@ -81,6 +81,8 @@
         _shouldShowLastItemAgain = YES;
         _carousel = car;
         [self addSubview:_carousel];
+        _votingStackTiltOption = 0.6f;
+        _votingStackSpacingOption = 1.8f;
         
         UIView * selectionTempView = [[UIView alloc] initWithFrame:self.bounds];
         selectionTempView.userInteractionEnabled = YES;
@@ -287,9 +289,9 @@
 - (CGFloat)carousel:(iCarousel *)carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value{
     switch (option) {
         case iCarouselOptionTilt:
-            return 0.5f;
+            return self.votingStackTiltOption;
         case iCarouselOptionSpacing:
-            return 1.8f;
+            return self.votingStackSpacingOption;
         case iCarouselOptionWrap:
             return self.shouldWrap;
         default:
