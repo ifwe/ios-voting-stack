@@ -222,6 +222,19 @@
 }
 
 
+- (CATransform3D) offStageTransformation: (CGPoint) releasePoint forAngle: (CGFloat) angle
+{
+    if (angle < 0) {
+        return CATransform3DIdentity;
+    }
+    CGPoint offStagePoint = CGPointMake(releasePoint.x*3.0f, releasePoint.y*3.0f);
+    
+    CATransform3D translateRotation = CATransform3DMakeTranslation(offStagePoint.x, offStagePoint.y, 0.0f);
+    translateRotation = CATransform3DRotate(translateRotation, angle, 0, 0, 1);
+    return translateRotation;
+    
+}
+
 #pragma mark - Getter & Setter
 
 - (CGFloat)selectionCommitThresholdSquared
@@ -405,9 +418,22 @@
         case UIGestureRecognizerStateEnded:
         {
             [self shouldShowUserSelectionCategory:NO atTouchPoint:[panGesture locationInView:self]];
-            [self currentSelectedView].layer.transform = CATransform3DIdentity;
-            [self.delegate votingStack:self didSelectChoiceAtIndex:self.currentSelection
-                               atIndex:self.carousel.currentItemIndex];
+            
+            
+            CGPoint offStagePoint = CGPointMake(dxPointFromOrigin.x, dxPointFromOrigin.y+halfSelectionViewHeight);
+            CATransform3D offStageTransformation = [self offStageTransformation:offStagePoint forAngle:(self.currentSelection<0)?-1.0f:angleFromLastTouchPoint];
+            //[self offStageTransformation:offStagePoint andCurrentSelection:self.currentSelection withCurrentTransformation:[self currentSelectedView].layer.transform];
+            
+            [UIView animateWithDuration:0.5f animations:^{
+                [self currentSelectedView].layer.transform = offStageTransformation;
+            } completion:^(BOOL finished) {
+                [self currentSelectedView].layer.transform = CATransform3DIdentity;
+                [self.delegate votingStack:self didSelectChoiceAtIndex:self.currentSelection
+                                   atIndex:self.carousel.currentItemIndex];
+                
+            }];
+            
+            
         }
             break;
         default:

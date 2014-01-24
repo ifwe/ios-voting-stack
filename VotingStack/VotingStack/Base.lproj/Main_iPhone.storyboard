@@ -30,6 +30,7 @@
                                             <action selector="stepForward:" destination="vXZ-lx-hvc" id="7mH-nB-jo4"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="3Lo-kq-ruu"/>
                                     <barButtonItem title="warp: ON" id="BFE-XR-Qgn">
                                         <connections>
                                             <action selector="shouldWarp:" destination="vXZ-lx-hvc" id="nu7-BT-9gn"/>
@@ -46,6 +47,8 @@
                                             <action selector="togglePie:" destination="vXZ-lx-hvc" id="vfL-oO-AV8"/>
                                         </connections>
                                     </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="XfN-3m-fbQ"/>
+                                    <barButtonItem title="Item" id="u3M-Hq-c78"/>
                                 </items>
                             </toolbar>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Will select: " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ybc-yS-SHg">
