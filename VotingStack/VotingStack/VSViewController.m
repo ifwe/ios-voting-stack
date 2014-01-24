@@ -8,6 +8,8 @@
 
 #import "VSViewController.h"
 
+#define MAGIC_TAG (78)
+
 @interface VSViewController () <VotingStackViewDataSource>
 
 @property (nonatomic, strong) NSMutableArray *arrayOfString;
@@ -106,7 +108,12 @@
 
 
 - (UIView *)votingStack:(VotingStackView *)vsView viewForItemAtIndex:(NSUInteger)index reusingView:(UIView *)view{
-    return [self.arrayOfView objectAtIndex:index];
+    UIView * theView = [self.arrayOfView objectAtIndex:index];
+    UIView * taggedView = [theView viewWithTag:MAGIC_TAG];
+    if (taggedView) {
+        [taggedView removeFromSuperview];
+    }
+    return theView;
 }
 
 
@@ -154,8 +161,24 @@
 
 - (void) votingStack:(VotingStackView *) vsView willSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex{
 //    NSLog(@"%@, %d", NSStringFromSelector(_cmd), index);
+    
+    
     self.selectionIndex.text = [NSString stringWithFormat:@"%d", index];
     self.currentSelectionCategory.text = (index <0)?@"Cancel":self.arrayOfString[index%self.arrayOfString.count];
+    
+    UILabel * label = (UILabel *)[self.voteView.currentSelectionView viewWithTag:MAGIC_TAG];
+    if (!label) {
+        label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 200, 250)];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.tag = MAGIC_TAG;
+        [self.voteView.currentSelectionView addSubview:label];
+    }
+    
+    if (index >= 0) {
+        label.text = self.currentSelectionCategory.text;
+    }else{
+        label.text = @"";
+    }
 }
 
 - (void) votingStack:(VotingStackView *) vsView didSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex{

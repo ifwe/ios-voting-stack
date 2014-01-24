@@ -56,6 +56,8 @@
 
 @property (nonatomic) BOOL shouldLoadUserSelectionData;
 
+@property (nonatomic, weak) UIView *currentSelectionView;
+
 // -1 is cancel. By default currentSelection is -1
 @property (nonatomic) NSInteger currentSelection;
 
@@ -258,6 +260,14 @@
 {
     _shouldShowSelectionPie = shouldShowSelectionPie;
     self.pieChart.layer.opacity = (_shouldShowSelectionPie)?1.0f:0.0f;
+}
+
+- (UIView *)currentSelectionView
+{
+    if ([self.SelectionView subviews].count != 0) {
+        return [self currentSelectedView];
+    }
+    return nil;
 }
 
 #pragma mark - iCarouselDataSource

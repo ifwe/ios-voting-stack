@@ -73,6 +73,8 @@
 
 @property (nonatomic) BOOL shouldShowSelectionPie;
 
+@property (nonatomic, readonly) UIView *currentSelectionView;
+
 - (void) popFront;
 //- (void) pushFront;
 
