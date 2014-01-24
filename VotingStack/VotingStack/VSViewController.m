@@ -105,7 +105,7 @@
 - (NSMutableArray *)arrayOfString
 {
     if (!_arrayOfString) {
-        _arrayOfString = [[NSMutableArray alloc] initWithArray:@[@"cat", @"dog", @"bird", @"kid", @"turtle"]];
+        _arrayOfString = [[NSMutableArray alloc] initWithArray:@[@"😺 cat", @"🐶 dog", @"🐦 bird", @"kid", @"🐢 turtle"]];
     }
     return _arrayOfString;
 }
