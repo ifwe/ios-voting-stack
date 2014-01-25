@@ -2,7 +2,7 @@ Purpose
 --------------
 Voting Stack View is an simple and easy-to-use selection visual representation. It takes advantage of VotingStackView and XYPieChart to give the world class animation.
 
-!https://raw.github.com/tagged/ios-voting-stack/master/VotingStack/selection.gif!
+![Demo](https://raw.github.com/tagged/ios-voting-stack/master/VotingStack/selection.gif "Demo")
 
 Supported OS & SDK Versions
 -----------------------------
