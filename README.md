@@ -1,13 +1,13 @@
 Purpose
 --------------
-Voting Stack View is an simple and easy-to-use selection visual representation. It takes advantage of VotingStackView and XYPieChart to give the world class animation.
+Voting Stack View is an simple and easy-to-use selection visual representation. It takes advantage of iCarousel and XYPieChart to give the world class animation.
 
 ![Demo](https://s3.amazonaws.com/uploads.hipchat.com/30/602337/hCHDPFvF8scRG2H/selection.gif)
 
 Supported OS & SDK Versions
 -----------------------------
 
-* Supported build target - iOS 6.1 / Mac OS 10.8 (Xcode 4.6, Apple LLVM compiler 4.2)
+* Supported build target - iOS 6.1 (Xcode 4.6, Apple LLVM compiler 4.2)
 
 NOTE: 'Supported' means that the library has been tested with this version. 'Compatible' means that the library should work on this OS version (i.e. it doesn't rely on any unavailable SDK features) but is no longer being tested for compatibility and may require tweaking or bug fixes to run correctly.
 
