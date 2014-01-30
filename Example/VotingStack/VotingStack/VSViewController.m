@@ -88,6 +88,12 @@
     sender.title = self.voteView.shouldWrap?@"warp: ON":@"warp: OFF";
 }
 
+
+- (IBAction)animatedMovement:(UIBarButtonItem *)sender {
+    [self.voteView animatedPanFrom:CGPointMake(132.5f, 193.0f) to:CGPointMake(34.0f, 72.0f)];
+}
+
+
 - (NSMutableArray *)arrayOfSelection
 {
     if (!_arrayOfSelection) {

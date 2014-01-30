@@ -52,6 +52,11 @@
 - (void) votingStack:(VotingStackView *) vsView willSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex;
 - (void) votingStack:(VotingStackView *) vsView didSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex;
 
+
+- (CGFloat) votingStackTiltOption;
+
+- (CGFloat) votingStackSpacingOption;
+
 @end
 
 
@@ -75,11 +80,13 @@
 
 @property (nonatomic, readonly) UIView *currentSelectionView;
 
-@property (nonatomic) CGFloat votingStackTiltOption;
-
-@property (nonatomic) CGFloat votingStackSpacingOption;
+@property (nonatomic, readonly) BOOL isAnimatedMovement;
 
 - (void) popFront;
+
+- (void) reloadData;
+
+- (void) animatedPanFrom: (CGPoint) fromLocation to: (CGPoint) toLocation;
 //- (void) pushFront;
 
 @end

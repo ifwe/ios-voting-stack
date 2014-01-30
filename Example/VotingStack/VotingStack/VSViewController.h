@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "VotingStackView.h"
+#import <iosVotingStack/VotingStackView.h>
 
 @interface VSViewController : UIViewController <VotingStackViewDataSource>
 @property (weak, nonatomic) IBOutlet VotingStackView *voteView;

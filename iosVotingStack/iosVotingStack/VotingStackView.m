@@ -9,6 +9,7 @@
 #import "VotingStackView.h"
 #import "iCarousel.h"
 #import "XYPieChart.h"
+#import "CGPointExtension.h"
 
 
 
@@ -36,6 +37,11 @@
 - (void) votingStack:(VotingStackView *) vsView didSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex{}
 
 
+- (CGFloat) votingStackTiltOption{return 0.6f;}
+
+- (CGFloat) votingStackSpacingOption{return 0.2f;}
+
+
 @end
 
 
@@ -58,8 +64,21 @@
 
 @property (nonatomic, weak) UIView *currentSelectionView;
 
+@property (nonatomic, weak) UIView *disableUserTouchView;
+
 // -1 is cancel. By default currentSelection is -1
 @property (nonatomic) NSInteger currentSelection;
+
+@property (nonatomic) UIGestureRecognizerState currentAnimationMovementState;
+
+@property (nonatomic) CGPoint currentAnimationMovementStartPoint;
+
+@property (nonatomic) CGPoint currentAnimationMovementEndPoint;
+
+@property (nonatomic) CGFloat currentAnimationMovementPercentage;
+
+@property (nonatomic) CGFloat currentAnimationMovementChangeRate;
+
 
 @end
 
@@ -81,8 +100,6 @@
         _shouldShowLastItemAgain = YES;
         _carousel = car;
         [self addSubview:_carousel];
-        _votingStackTiltOption = 0.6f;
-        _votingStackSpacingOption = 1.8f;
         
         UIView * selectionTempView = [[UIView alloc] initWithFrame:self.bounds];
         selectionTempView.userInteractionEnabled = YES;
@@ -105,6 +122,17 @@
         [self addSubview:pieChartTemp];
         
         self.currentSelection = -1;
+        
+        UIView *disableUserTouch = [[UIView alloc] initWithFrame:self.bounds];
+        [self addSubview:disableUserTouch];
+        _disableUserTouchView = disableUserTouch;
+        _disableUserTouchView.userInteractionEnabled = NO;
+        
+        _isAnimatedMovement = NO;
+        _currentAnimationMovementState = UIGestureRecognizerStateFailed;
+        _currentAnimationMovementChangeRate = 0.01f;
+        _currentAnimationMovementStartPoint = CGPointZero;
+        _currentAnimationMovementEndPoint = CGPointZero;
         
     });
 }
@@ -138,6 +166,14 @@
         [self.carousel itemViewAtIndex:self.carousel.currentItemIndex].layer.opacity = 0.0f;
         [self.carousel scrollToItemAtIndex:self.carousel.currentItemIndex+1 animated:YES];
     }
+}
+
+
+- (void)reloadData
+{
+    [self restoreTopMostViewFromCarousel];
+    [self.carousel reloadData];
+    [self borrowTopMostViewFromCarousel];
 }
 
 
@@ -200,7 +236,9 @@
 - (void) borrowTopMostViewFromCarousel
 {
     UIView * topView = [self.carousel itemViewAtIndex:self.carousel.currentItemIndex];
-    topView.frame = topView.superview.frame;
+    
+    topView.frame = [topView convertRect:topView.frame toView:self.SelectionView];
+    
     topView.layer.opacity = 1.0f;
     topView.userInteractionEnabled = YES;
     
@@ -237,6 +275,12 @@
     translateRotation = CATransform3DRotate(translateRotation, angle, 0, 0, 1);
     return translateRotation;
     
+}
+
+
+- (void) setUserTouchInputDisable : (BOOL) shouldDisable
+{
+    self.disableUserTouchView.userInteractionEnabled = shouldDisable;
 }
 
 #pragma mark - Getter & Setter
@@ -289,33 +333,15 @@
 - (CGFloat)carousel:(iCarousel *)carousel valueForOption:(iCarouselOption)option withDefault:(CGFloat)value{
     switch (option) {
         case iCarouselOptionTilt:
-            return self.votingStackTiltOption;
+            return [self.delegate votingStackTiltOption];
         case iCarouselOptionSpacing:
-            return self.votingStackSpacingOption;
+            return [self.delegate votingStackSpacingOption];
         case iCarouselOptionWrap:
             return self.shouldWrap;
         default:
             return value;
     }
 }
-
-- (NSUInteger)numberOfPlaceholdersInCarousel:(iCarousel *)carousel
-{
-    //note: placeholder views are only displayed on some carousels if wrapping is disabled
-    return 2;
-}
-
-
-- (UIView *)carousel:(iCarousel *)carousel placeholderViewAtIndex:(NSUInteger)index reusingView:(UIView *)view
-{
-    UIView * placeholderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, 200, 250)];
-    UILabel *label = [[UILabel alloc] initWithFrame:placeholderView.frame];
-    label.textAlignment = NSTextAlignmentCenter;
-    label.text = @"End";
-    [placeholderView addSubview:label];
-    return placeholderView;
-}
-
 
 #pragma mark - iCarouselDelegate
 
@@ -387,14 +413,11 @@
 #pragma mark - UIPanGestureRecognizer
 
 
-- (void) pan:(UIPanGestureRecognizer *) panGesture
+- (void)userCurrentItemSelection:(CGPoint)dxPointFromOrigin locationOnScreen:(CGPoint)locationOnScreen currentState:(UIGestureRecognizerState)currentState
 {
-    CGPoint dxPointFromOrigin = [panGesture translationInView:self.SelectionView];
-    
-//    CGPoint locationOnScreen = [panGesture locationInView:[[UIApplication sharedApplication] keyWindow]];
+    //    CGPoint locationOnScreen = [panGesture locationInView:[[UIApplication sharedApplication] keyWindow]];
     
     CGFloat halfSelectionViewHeight = [[self currentSelectedView] bounds].size.height/2.0f;
-    
     
     CGFloat angleFromLastTouchPoint = atan2f(dxPointFromOrigin.y, dxPointFromOrigin.x) + M_PI;
     
@@ -404,12 +427,12 @@
     CGFloat angleFromCardBottomEdge = atan2f(dxPointFromOrigin.y, dxPointFromOrigin.x) + M_PI;
     
     
-    switch (panGesture.state) {
+    switch (currentState) {
         case UIGestureRecognizerStateChanged:
         {
             
 #ifdef VOTING_STACK_DEBUG
-            NSLog(@"2: %f, dx=(x=%f, y=%f)", DEGREES(angleFromCardBottomEdge), dxPointFromOrigin.x, dxPointFromOrigin.y);
+            NSLog(@"2: %f, dx=(x=%f, y=%f), locS=(x=%f, y=%f)", DEGREES(angleFromCardBottomEdge), dxPointFromOrigin.x, dxPointFromOrigin.y, locationOnScreen.x, locationOnScreen.y);
 #endif
             CATransform3D translateRotation = CATransform3DMakeTranslation(dxPointFromOrigin.x, dxPointFromOrigin.y+halfSelectionViewHeight, 0.0f);
             
@@ -424,12 +447,14 @@
             break;
         case UIGestureRecognizerStateBegan:
         {
-            [self shouldShowUserSelectionCategory:YES atTouchPoint:[panGesture locationInView:self]];
+            [self shouldShowUserSelectionCategory:YES atTouchPoint:locationOnScreen];
         }
             break;
+        case UIGestureRecognizerStateFailed:
+        case UIGestureRecognizerStateCancelled:
         case UIGestureRecognizerStateEnded:
         {
-            [self shouldShowUserSelectionCategory:NO atTouchPoint:[panGesture locationInView:self]];
+            [self shouldShowUserSelectionCategory:NO atTouchPoint:locationOnScreen];
             
             
             CGPoint offStagePoint = CGPointMake(dxPointFromOrigin.x, dxPointFromOrigin.y+halfSelectionViewHeight);
@@ -451,6 +476,102 @@
         default:
             break;
     }
+}
+
+
+
+- (void) pan:(UIPanGestureRecognizer *) panGesture
+{
+    CGPoint dxPointFromOrigin = [panGesture translationInView:self.SelectionView];
+    
+    CGPoint locationOnScreen = [panGesture locationInView:self];
+    
+    UIGestureRecognizerState currentState = panGesture.state;
+    
+    [self userCurrentItemSelection:dxPointFromOrigin locationOnScreen:locationOnScreen currentState:currentState];
+}
+
+
+/*
+ DFA for animated pan:
+ [UIGestureRecognizerStateFailed]                           -> [UIGestureRecognizerStateBegan]      ; disable user touch & update start & 
+                                                                                                    ; end point & percentage = 0.0f & isAnimatedMovement = YES
+ [UIGestureRecognizerStateBegan]                            -> [UIGestureRecognizerStateChanged]    ; percentage += changeRate
+ [UIGestureRecognizerStateChanged]                          -> [UIGestureRecognizerStateChanged]    ; percentage += changeRate
+ [percentage >= 100.0f && UIGestureRecognizerStateChanged]  -> [UIGestureRecognizerStateEnded]
+ [UIGestureRecognizerStateEnded][END STATE]                 -> [UIGestureRecognizerStateFailed]     ; enable user touch & start & end point & percentage = 0.0f 
+                                                                                                    ; isAnimatedMovement = NO
+ */
+
+- (void) animatedPanFrom: (CGPoint) fromLocation to: (CGPoint) toLocation
+{
+    switch (self.currentAnimationMovementState) {
+        case UIGestureRecognizerStateFailed:
+        {
+            self.currentAnimationMovementState = UIGestureRecognizerStateBegan;
+            _isAnimatedMovement = YES;
+            
+            [self setUserTouchInputDisable:YES];
+            self.currentAnimationMovementStartPoint = fromLocation;
+            self.currentAnimationMovementEndPoint = toLocation;
+            self.currentAnimationMovementPercentage = 0.0f;
+            
+            assert(_currentAnimationMovementChangeRate > 0.0f);
+            
+        }
+            break;
+        case UIGestureRecognizerStateBegan:
+        {
+            self.currentAnimationMovementState = UIGestureRecognizerStateChanged;
+            
+            self.currentAnimationMovementPercentage += self.currentAnimationMovementChangeRate;
+            
+        }
+            break;
+        case UIGestureRecognizerStateChanged:
+        {
+#ifdef VOTING_STACK_DEBUG
+            NSLog(@"%f", self.currentAnimationMovementPercentage);
+#endif
+            if (self.currentAnimationMovementPercentage >= 1.0f){
+                self.currentAnimationMovementState = UIGestureRecognizerStateEnded;
+            }else{
+                self.currentAnimationMovementPercentage += self.currentAnimationMovementChangeRate;
+            }
+        }
+            break;
+        default: //UIGestureRecognizerStateEnded or others
+        {
+            self.currentAnimationMovementState = UIGestureRecognizerStateFailed;
+            _isAnimatedMovement = NO;
+            
+            [self setUserTouchInputDisable:NO];
+            self.currentAnimationMovementStartPoint = CGPointZero;
+            self.currentAnimationMovementEndPoint = CGPointZero;
+            self.currentAnimationMovementPercentage = 0.0f;
+            
+        }
+            return; // END STATE
+            
+    }
+    
+    // using line equation: L(t) = A + t(B-A)
+    
+    CGPoint tMultBMinusA = CGPointMult(CGPointSub(self.currentAnimationMovementEndPoint, self.currentAnimationMovementStartPoint),
+                                                    self.currentAnimationMovementPercentage);
+    
+    CGPoint dxPointFromOrigin = tMultBMinusA;
+    
+    CGPoint locationOnScreen = CGPointAdd(self.currentAnimationMovementStartPoint, tMultBMinusA);
+    
+    [self userCurrentItemSelection:dxPointFromOrigin locationOnScreen:locationOnScreen currentState:self.currentAnimationMovementState];
+    
+    double delayInSeconds = 0.008;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+        [self animatedPanFrom:self.currentAnimationMovementStartPoint to:self.currentAnimationMovementEndPoint];
+    });
+    
 }
 
 
