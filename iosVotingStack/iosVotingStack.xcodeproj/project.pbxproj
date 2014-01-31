@@ -7,228 +7,130 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7C295CEA189B115600745E18 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7CDF4E1899D6C500A4254F /* Foundation.framework */; };
-		7C295CEF189B115600745E18 /* iosVotingStackLibrary.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 7C295CEE189B115600745E18 /* iosVotingStackLibrary.h */; };
-		7C295CF1189B115600745E18 /* iosVotingStackLibrary.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C295CF0189B115600745E18 /* iosVotingStackLibrary.m */; };
-		7C295D0B189B11D100745E18 /* CGPointExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7CDF611899D6E100A4254F /* CGPointExtension.m */; };
-		7C295D0C189B11D100745E18 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7CDF641899D6E100A4254F /* iCarousel.m */; };
-		7C295D0D189B11D100745E18 /* VotingStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7CDF661899D6E100A4254F /* VotingStackView.m */; };
-		7C295D0E189B11D100745E18 /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7CDF691899D6E100A4254F /* XYPieChart.m */; };
-		7C295D0F189B11D100745E18 /* iosVotingStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7CDF581899D6C500A4254F /* iosVotingStack.m */; };
-		7C7CDF4F1899D6C500A4254F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C7CDF4E1899D6C500A4254F /* Foundation.framework */; };
-		7C7CDF591899D6C500A4254F /* iosVotingStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7CDF581899D6C500A4254F /* iosVotingStack.m */; };
-		7C7CDF6A1899D6E100A4254F /* CGPointExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C7CDF601899D6E100A4254F /* CGPointExtension.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		7C7CDF6B1899D6E100A4254F /* CGPointExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7CDF611899D6E100A4254F /* CGPointExtension.m */; };
-		7C7CDF6C1899D6E100A4254F /* iCarousel.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C7CDF631899D6E100A4254F /* iCarousel.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		7C7CDF6D1899D6E100A4254F /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7CDF641899D6E100A4254F /* iCarousel.m */; };
-		7C7CDF6E1899D6E100A4254F /* VotingStackView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C7CDF651899D6E100A4254F /* VotingStackView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7C7CDF6F1899D6E100A4254F /* VotingStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7CDF661899D6E100A4254F /* VotingStackView.m */; };
-		7C7CDF701899D6E100A4254F /* XYPieChart.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C7CDF681899D6E100A4254F /* XYPieChart.h */; settings = {ATTRIBUTES = (Private, ); }; };
-		7C7CDF711899D6E100A4254F /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C7CDF691899D6E100A4254F /* XYPieChart.m */; };
+		7C3C6A3D189C27DD004770E0 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C3C6A3C189C27DD004770E0 /* Foundation.framework */; };
+		7C3C6A43189C27DD004770E0 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7C3C6A41189C27DD004770E0 /* InfoPlist.strings */; };
+		7C3C6A47189C27DD004770E0 /* iosVotingStack.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3C6A46189C27DD004770E0 /* iosVotingStack.m */; };
+		7C3C6A59189C27E7004770E0 /* CGPointExtension.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C3C6A4F189C27E7004770E0 /* CGPointExtension.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		7C3C6A5A189C27E7004770E0 /* CGPointExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3C6A50189C27E7004770E0 /* CGPointExtension.m */; };
+		7C3C6A5B189C27E7004770E0 /* iCarousel.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C3C6A52189C27E7004770E0 /* iCarousel.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		7C3C6A5C189C27E7004770E0 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3C6A53189C27E7004770E0 /* iCarousel.m */; };
+		7C3C6A5D189C27E7004770E0 /* VotingStackView.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C3C6A54189C27E7004770E0 /* VotingStackView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		7C3C6A5E189C27E7004770E0 /* VotingStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3C6A55189C27E7004770E0 /* VotingStackView.m */; };
+		7C3C6A5F189C27E7004770E0 /* XYPieChart.h in Headers */ = {isa = PBXBuildFile; fileRef = 7C3C6A57189C27E7004770E0 /* XYPieChart.h */; settings = {ATTRIBUTES = (Private, ); }; };
+		7C3C6A60189C27E7004770E0 /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3C6A58189C27E7004770E0 /* XYPieChart.m */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		7C295CE7189B115600745E18 /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-				7C295CEF189B115600745E18 /* iosVotingStackLibrary.h in CopyFiles */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		7C1BECDC189B06B30005232D /* iosVotingStack-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iosVotingStack-Prefix.pch"; sourceTree = "<group>"; };
-		7C1BECDD189B06B30005232D /* iosVotingStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iosVotingStack.h; sourceTree = "<group>"; };
-		7C1BECDF189B06B30005232D /* iosVotingStack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iosVotingStack.m; sourceTree = "<group>"; };
-		7C1BECE6189B06B30005232D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
-		7C1BECE9189B06B30005232D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		7C1BECF0189B06B30005232D /* iosVotingStackTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iosVotingStackTests-Info.plist"; sourceTree = "<group>"; };
-		7C1BECF2189B06B30005232D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		7C1BECF4189B06B30005232D /* iosVotingStackTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iosVotingStackTests.m; sourceTree = "<group>"; };
-		7C1BED00189B06EA0005232D /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
-		7C1BED02189B06F10005232D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		7C1BED04189B06F80005232D /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
-		7C295CE9189B115600745E18 /* libiosVotingStackLibrary.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libiosVotingStackLibrary.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		7C295CED189B115600745E18 /* iosVotingStackLibrary-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iosVotingStackLibrary-Prefix.pch"; sourceTree = "<group>"; };
-		7C295CEE189B115600745E18 /* iosVotingStackLibrary.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iosVotingStackLibrary.h; sourceTree = "<group>"; };
-		7C295CF0189B115600745E18 /* iosVotingStackLibrary.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iosVotingStackLibrary.m; sourceTree = "<group>"; };
-		7C7CDF4B1899D6C500A4254F /* iosVotingStackFramework.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework.static; includeInIndex = 0; path = iosVotingStackFramework.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7C7CDF4E1899D6C500A4254F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		7C7CDF521899D6C500A4254F /* iosVotingStack-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iosVotingStack-Info.plist"; sourceTree = "<group>"; };
-		7C7CDF541899D6C500A4254F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		7C7CDF561899D6C500A4254F /* iosVotingStack-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iosVotingStack-Prefix.pch"; sourceTree = "<group>"; };
-		7C7CDF571899D6C500A4254F /* iosVotingStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iosVotingStack.h; sourceTree = "<group>"; };
-		7C7CDF581899D6C500A4254F /* iosVotingStack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iosVotingStack.m; sourceTree = "<group>"; };
-		7C7CDF601899D6E100A4254F /* CGPointExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGPointExtension.h; sourceTree = "<group>"; };
-		7C7CDF611899D6E100A4254F /* CGPointExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGPointExtension.m; sourceTree = "<group>"; };
-		7C7CDF631899D6E100A4254F /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
-		7C7CDF641899D6E100A4254F /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
-		7C7CDF651899D6E100A4254F /* VotingStackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VotingStackView.h; sourceTree = "<group>"; };
-		7C7CDF661899D6E100A4254F /* VotingStackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VotingStackView.m; sourceTree = "<group>"; };
-		7C7CDF681899D6E100A4254F /* XYPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPieChart.h; sourceTree = "<group>"; };
-		7C7CDF691899D6E100A4254F /* XYPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPieChart.m; sourceTree = "<group>"; };
+		7C3C6A39189C27DD004770E0 /* iosVotingStack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework.static; includeInIndex = 0; path = iosVotingStack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7C3C6A3C189C27DD004770E0 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		7C3C6A40189C27DD004770E0 /* iosVotingStack-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "iosVotingStack-Info.plist"; sourceTree = "<group>"; };
+		7C3C6A42189C27DD004770E0 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7C3C6A44189C27DD004770E0 /* iosVotingStack-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "iosVotingStack-Prefix.pch"; sourceTree = "<group>"; };
+		7C3C6A45189C27DD004770E0 /* iosVotingStack.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iosVotingStack.h; sourceTree = "<group>"; };
+		7C3C6A46189C27DD004770E0 /* iosVotingStack.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = iosVotingStack.m; sourceTree = "<group>"; };
+		7C3C6A4F189C27E7004770E0 /* CGPointExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGPointExtension.h; sourceTree = "<group>"; };
+		7C3C6A50189C27E7004770E0 /* CGPointExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGPointExtension.m; sourceTree = "<group>"; };
+		7C3C6A52189C27E7004770E0 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
+		7C3C6A53189C27E7004770E0 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
+		7C3C6A54189C27E7004770E0 /* VotingStackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VotingStackView.h; sourceTree = "<group>"; };
+		7C3C6A55189C27E7004770E0 /* VotingStackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VotingStackView.m; sourceTree = "<group>"; };
+		7C3C6A57189C27E7004770E0 /* XYPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPieChart.h; sourceTree = "<group>"; };
+		7C3C6A58189C27E7004770E0 /* XYPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPieChart.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7C295CE6189B115600745E18 /* Frameworks */ = {
+		7C3C6A34189C27DD004770E0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C295CEA189B115600745E18 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7C7CDF461899D6C500A4254F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7C7CDF4F1899D6C500A4254F /* Foundation.framework in Frameworks */,
+				7C3C6A3D189C27DD004770E0 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7C1BECDA189B06B30005232D /* iosVotingStack */ = {
+		7C3C6A2E189C27DD004770E0 = {
 			isa = PBXGroup;
 			children = (
-				7C1BECDD189B06B30005232D /* iosVotingStack.h */,
-				7C1BECDF189B06B30005232D /* iosVotingStack.m */,
-				7C1BECDB189B06B30005232D /* Supporting Files */,
-			);
-			path = iosVotingStack;
-			sourceTree = "<group>";
-		};
-		7C1BECDB189B06B30005232D /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				7C1BECDC189B06B30005232D /* iosVotingStack-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		7C1BECEE189B06B30005232D /* iosVotingStackTests */ = {
-			isa = PBXGroup;
-			children = (
-				7C1BECF4189B06B30005232D /* iosVotingStackTests.m */,
-				7C1BECEF189B06B30005232D /* Supporting Files */,
-			);
-			path = iosVotingStackTests;
-			sourceTree = "<group>";
-		};
-		7C1BECEF189B06B30005232D /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				7C1BECF0189B06B30005232D /* iosVotingStackTests-Info.plist */,
-				7C1BECF1189B06B30005232D /* InfoPlist.strings */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		7C295CEB189B115600745E18 /* iosVotingStackLibrary */ = {
-			isa = PBXGroup;
-			children = (
-				7C295CEE189B115600745E18 /* iosVotingStackLibrary.h */,
-				7C295CF0189B115600745E18 /* iosVotingStackLibrary.m */,
-				7C295CEC189B115600745E18 /* Supporting Files */,
-			);
-			path = iosVotingStackLibrary;
-			sourceTree = "<group>";
-		};
-		7C295CEC189B115600745E18 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				7C295CED189B115600745E18 /* iosVotingStackLibrary-Prefix.pch */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		7C7CDF401899D6C500A4254F = {
-			isa = PBXGroup;
-			children = (
-				7C7CDF501899D6C500A4254F /* iosVotingStack */,
-				7C1BECDA189B06B30005232D /* iosVotingStack */,
-				7C1BECEE189B06B30005232D /* iosVotingStackTests */,
-				7C295CEB189B115600745E18 /* iosVotingStackLibrary */,
-				7C7CDF4D1899D6C500A4254F /* Frameworks */,
-				7C7CDF4C1899D6C500A4254F /* Products */,
+				7C3C6A4D189C27E7004770E0 /* library */,
+				7C3C6A3E189C27DD004770E0 /* iosVotingStack */,
+				7C3C6A3B189C27DD004770E0 /* Frameworks */,
+				7C3C6A3A189C27DD004770E0 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		7C7CDF4C1899D6C500A4254F /* Products */ = {
+		7C3C6A3A189C27DD004770E0 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7C7CDF4B1899D6C500A4254F /* iosVotingStackFramework.framework */,
-				7C295CE9189B115600745E18 /* libiosVotingStackLibrary.a */,
+				7C3C6A39189C27DD004770E0 /* iosVotingStack.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7C7CDF4D1899D6C500A4254F /* Frameworks */ = {
+		7C3C6A3B189C27DD004770E0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				7C1BED04189B06F80005232D /* UIKit.framework */,
-				7C1BED02189B06F10005232D /* CoreGraphics.framework */,
-				7C1BED00189B06EA0005232D /* QuartzCore.framework */,
-				7C7CDF4E1899D6C500A4254F /* Foundation.framework */,
-				7C1BECE6189B06B30005232D /* XCTest.framework */,
-				7C1BECE9189B06B30005232D /* UIKit.framework */,
+				7C3C6A3C189C27DD004770E0 /* Foundation.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		7C7CDF501899D6C500A4254F /* iosVotingStack */ = {
+		7C3C6A3E189C27DD004770E0 /* iosVotingStack */ = {
 			isa = PBXGroup;
 			children = (
-				7C7CDF5F1899D6E100A4254F /* CGPointExtension */,
-				7C7CDF621899D6E100A4254F /* iCarousel */,
-				7C7CDF651899D6E100A4254F /* VotingStackView.h */,
-				7C7CDF661899D6E100A4254F /* VotingStackView.m */,
-				7C7CDF671899D6E100A4254F /* XYPieChart */,
-				7C7CDF571899D6C500A4254F /* iosVotingStack.h */,
-				7C7CDF581899D6C500A4254F /* iosVotingStack.m */,
-				7C7CDF511899D6C500A4254F /* Supporting Files */,
+				7C3C6A45189C27DD004770E0 /* iosVotingStack.h */,
+				7C3C6A46189C27DD004770E0 /* iosVotingStack.m */,
+				7C3C6A3F189C27DD004770E0 /* Supporting Files */,
 			);
 			path = iosVotingStack;
 			sourceTree = "<group>";
 		};
-		7C7CDF511899D6C500A4254F /* Supporting Files */ = {
+		7C3C6A3F189C27DD004770E0 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				7C7CDF521899D6C500A4254F /* iosVotingStack-Info.plist */,
-				7C7CDF531899D6C500A4254F /* InfoPlist.strings */,
-				7C7CDF561899D6C500A4254F /* iosVotingStack-Prefix.pch */,
+				7C3C6A40189C27DD004770E0 /* iosVotingStack-Info.plist */,
+				7C3C6A41189C27DD004770E0 /* InfoPlist.strings */,
+				7C3C6A44189C27DD004770E0 /* iosVotingStack-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		7C7CDF5F1899D6E100A4254F /* CGPointExtension */ = {
+		7C3C6A4D189C27E7004770E0 /* library */ = {
 			isa = PBXGroup;
 			children = (
-				7C7CDF601899D6E100A4254F /* CGPointExtension.h */,
-				7C7CDF611899D6E100A4254F /* CGPointExtension.m */,
+				7C3C6A4E189C27E7004770E0 /* CGPointExtension */,
+				7C3C6A51189C27E7004770E0 /* iCarousel */,
+				7C3C6A54189C27E7004770E0 /* VotingStackView.h */,
+				7C3C6A55189C27E7004770E0 /* VotingStackView.m */,
+				7C3C6A56189C27E7004770E0 /* XYPieChart */,
+			);
+			path = library;
+			sourceTree = "<group>";
+		};
+		7C3C6A4E189C27E7004770E0 /* CGPointExtension */ = {
+			isa = PBXGroup;
+			children = (
+				7C3C6A4F189C27E7004770E0 /* CGPointExtension.h */,
+				7C3C6A50189C27E7004770E0 /* CGPointExtension.m */,
 			);
 			path = CGPointExtension;
 			sourceTree = "<group>";
 		};
-		7C7CDF621899D6E100A4254F /* iCarousel */ = {
+		7C3C6A51189C27E7004770E0 /* iCarousel */ = {
 			isa = PBXGroup;
 			children = (
-				7C7CDF631899D6E100A4254F /* iCarousel.h */,
-				7C7CDF641899D6E100A4254F /* iCarousel.m */,
+				7C3C6A52189C27E7004770E0 /* iCarousel.h */,
+				7C3C6A53189C27E7004770E0 /* iCarousel.m */,
 			);
 			path = iCarousel;
 			sourceTree = "<group>";
 		};
-		7C7CDF671899D6E100A4254F /* XYPieChart */ = {
+		7C3C6A56189C27E7004770E0 /* XYPieChart */ = {
 			isa = PBXGroup;
 			children = (
-				7C7CDF681899D6E100A4254F /* XYPieChart.h */,
-				7C7CDF691899D6E100A4254F /* XYPieChart.m */,
+				7C3C6A57189C27E7004770E0 /* XYPieChart.h */,
+				7C3C6A58189C27E7004770E0 /* XYPieChart.m */,
 			);
 			path = XYPieChart;
 			sourceTree = "<group>";
@@ -236,95 +138,78 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		7C7CDF471899D6C500A4254F /* Headers */ = {
+		7C3C6A35189C27DD004770E0 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C7CDF6E1899D6E100A4254F /* VotingStackView.h in Headers */,
-				7C7CDF6C1899D6E100A4254F /* iCarousel.h in Headers */,
-				7C7CDF6A1899D6E100A4254F /* CGPointExtension.h in Headers */,
-				7C7CDF701899D6E100A4254F /* XYPieChart.h in Headers */,
+				7C3C6A5D189C27E7004770E0 /* VotingStackView.h in Headers */,
+				7C3C6A5B189C27E7004770E0 /* iCarousel.h in Headers */,
+				7C3C6A59189C27E7004770E0 /* CGPointExtension.h in Headers */,
+				7C3C6A5F189C27E7004770E0 /* XYPieChart.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		7C295CE8189B115600745E18 /* iosVotingStackLibrary */ = {
+		7C3C6A38189C27DD004770E0 /* iosVotingStack */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7C295D09189B115700745E18 /* Build configuration list for PBXNativeTarget "iosVotingStackLibrary" */;
+			buildConfigurationList = 7C3C6A4A189C27DD004770E0 /* Build configuration list for PBXNativeTarget "iosVotingStack" */;
 			buildPhases = (
-				7C295CE5189B115600745E18 /* Sources */,
-				7C295CE6189B115600745E18 /* Frameworks */,
-				7C295CE7189B115600745E18 /* CopyFiles */,
+				7C3C6A33189C27DD004770E0 /* Sources */,
+				7C3C6A34189C27DD004770E0 /* Frameworks */,
+				7C3C6A35189C27DD004770E0 /* Headers */,
+				7C3C6A36189C27DD004770E0 /* Resources */,
+				7C3C6A37189C27DD004770E0 /* ShellScript */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = iosVotingStackLibrary;
-			productName = iosVotingStackLibrary;
-			productReference = 7C295CE9189B115600745E18 /* libiosVotingStackLibrary.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		7C7CDF4A1899D6C500A4254F /* iosVotingStackFramework */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7C7CDF5C1899D6C500A4254F /* Build configuration list for PBXNativeTarget "iosVotingStackFramework" */;
-			buildPhases = (
-				7C7CDF451899D6C500A4254F /* Sources */,
-				7C7CDF461899D6C500A4254F /* Frameworks */,
-				7C7CDF471899D6C500A4254F /* Headers */,
-				7C7CDF481899D6C500A4254F /* Resources */,
-				7C7CDF491899D6C500A4254F /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = iosVotingStackFramework;
+			name = iosVotingStack;
 			productName = iosVotingStack;
-			productReference = 7C7CDF4B1899D6C500A4254F /* iosVotingStackFramework.framework */;
+			productReference = 7C3C6A39189C27DD004770E0 /* iosVotingStack.framework */;
 			productType = "com.apple.product-type.framework.static";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		7C7CDF411899D6C500A4254F /* Project object */ = {
+		7C3C6A2F189C27DD004770E0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Tagged;
 			};
-			buildConfigurationList = 7C7CDF441899D6C500A4254F /* Build configuration list for PBXProject "iosVotingStack" */;
+			buildConfigurationList = 7C3C6A32189C27DD004770E0 /* Build configuration list for PBXProject "iosVotingStack" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
 			);
-			mainGroup = 7C7CDF401899D6C500A4254F;
-			productRefGroup = 7C7CDF4C1899D6C500A4254F /* Products */;
+			mainGroup = 7C3C6A2E189C27DD004770E0;
+			productRefGroup = 7C3C6A3A189C27DD004770E0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7C7CDF4A1899D6C500A4254F /* iosVotingStackFramework */,
-				7C295CE8189B115600745E18 /* iosVotingStackLibrary */,
+				7C3C6A38189C27DD004770E0 /* iosVotingStack */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		7C7CDF481899D6C500A4254F /* Resources */ = {
+		7C3C6A36189C27DD004770E0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7C3C6A43189C27DD004770E0 /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7C7CDF491899D6C500A4254F /* ShellScript */ = {
+		7C3C6A37189C27DD004770E0 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -340,46 +225,25 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		7C295CE5189B115600745E18 /* Sources */ = {
+		7C3C6A33189C27DD004770E0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7C295D0B189B11D100745E18 /* CGPointExtension.m in Sources */,
-				7C295D0C189B11D100745E18 /* iCarousel.m in Sources */,
-				7C295D0D189B11D100745E18 /* VotingStackView.m in Sources */,
-				7C295D0E189B11D100745E18 /* XYPieChart.m in Sources */,
-				7C295D0F189B11D100745E18 /* iosVotingStack.m in Sources */,
-				7C295CF1189B115600745E18 /* iosVotingStackLibrary.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7C7CDF451899D6C500A4254F /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7C7CDF6F1899D6E100A4254F /* VotingStackView.m in Sources */,
-				7C7CDF6D1899D6E100A4254F /* iCarousel.m in Sources */,
-				7C7CDF6B1899D6E100A4254F /* CGPointExtension.m in Sources */,
-				7C7CDF711899D6E100A4254F /* XYPieChart.m in Sources */,
-				7C7CDF591899D6C500A4254F /* iosVotingStack.m in Sources */,
+				7C3C6A5E189C27E7004770E0 /* VotingStackView.m in Sources */,
+				7C3C6A5C189C27E7004770E0 /* iCarousel.m in Sources */,
+				7C3C6A5A189C27E7004770E0 /* CGPointExtension.m in Sources */,
+				7C3C6A60189C27E7004770E0 /* XYPieChart.m in Sources */,
+				7C3C6A47189C27DD004770E0 /* iosVotingStack.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		7C1BECF1189B06B30005232D /* InfoPlist.strings */ = {
+		7C3C6A41189C27DD004770E0 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				7C1BECF2189B06B30005232D /* en */,
-			);
-			name = InfoPlist.strings;
-			sourceTree = "<group>";
-		};
-		7C7CDF531899D6C500A4254F /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7C7CDF541899D6C500A4254F /* en */,
+				7C3C6A42189C27DD004770E0 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";
@@ -387,37 +251,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		7C295D05189B115700745E18 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				DSTROOT = /tmp/iosVotingStackLibrary.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "iosVotingStackLibrary/iosVotingStackLibrary-Prefix.pch";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		7C295D06189B115700745E18 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
-				DSTROOT = /tmp/iosVotingStackLibrary.dst;
-				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "iosVotingStackLibrary/iosVotingStackLibrary-Prefix.pch";
-				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		7C7CDF5A1899D6C500A4254F /* Debug */ = {
+		7C3C6A48189C27DD004770E0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -455,7 +289,7 @@
 			};
 			name = Debug;
 		};
-		7C7CDF5B1899D6C500A4254F /* Release */ = {
+		7C3C6A49189C27DD004770E0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -487,10 +321,13 @@
 			};
 			name = Release;
 		};
-		7C7CDF5D1899D6C500A4254F /* Debug */ = {
+		7C3C6A4B189C27DD004770E0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
@@ -503,10 +340,13 @@
 			};
 			name = Debug;
 		};
-		7C7CDF5E1899D6C500A4254F /* Release */ = {
+		7C3C6A4C189C27DD004770E0 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
+				ARCHS = (
+					armv6,
+					"$(ARCHS_STANDARD_32_BIT)",
+				);
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				FRAMEWORK_VERSION = A;
@@ -522,33 +362,24 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7C295D09189B115700745E18 /* Build configuration list for PBXNativeTarget "iosVotingStackLibrary" */ = {
+		7C3C6A32189C27DD004770E0 /* Build configuration list for PBXProject "iosVotingStack" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7C295D05189B115700745E18 /* Debug */,
-				7C295D06189B115700745E18 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
-		7C7CDF441899D6C500A4254F /* Build configuration list for PBXProject "iosVotingStack" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7C7CDF5A1899D6C500A4254F /* Debug */,
-				7C7CDF5B1899D6C500A4254F /* Release */,
+				7C3C6A48189C27DD004770E0 /* Debug */,
+				7C3C6A49189C27DD004770E0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7C7CDF5C1899D6C500A4254F /* Build configuration list for PBXNativeTarget "iosVotingStackFramework" */ = {
+		7C3C6A4A189C27DD004770E0 /* Build configuration list for PBXNativeTarget "iosVotingStack" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7C7CDF5D1899D6C500A4254F /* Debug */,
-				7C7CDF5E1899D6C500A4254F /* Release */,
+				7C3C6A4B189C27DD004770E0 /* Debug */,
+				7C3C6A4C189C27DD004770E0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 7C7CDF411899D6C500A4254F /* Project object */;
+	rootObject = 7C3C6A2F189C27DD004770E0 /* Project object */;
 }

@@ -25,7 +25,7 @@
 - (NSString *)votingstack:(VotingStackView *)vsView textForSliceAtIndex:(NSUInteger)index atIndex: (NSUInteger) itemIndex{return @"";}
 
 - (UIColor *)votingstack:(VotingStackView *)vsView colorForSliceAtIndex:(NSUInteger)index atIndex: (NSUInteger) itemIndex{
-    CGFloat randomBase = arc4random() % 74;
+    CGFloat randomBase = arc4random() % 74 +1 ;
     CGFloat topNum = ((CGFloat)(arc4random() % (NSInteger)randomBase));
     return [UIColor colorWithHue:topNum/randomBase
                       saturation:topNum/randomBase
@@ -84,7 +84,7 @@
 
 
 @implementation VotingStackView
-
+@synthesize selectionCommitThresholdSquared = _selectionCommitThresholdSquared;
 
 - (void) setup
 {
@@ -109,14 +109,13 @@
         
         _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
         
-        
-        
         XYPieChart *pieChartTemp = [[XYPieChart alloc] initWithFrame:_SelectionView.frame Center:_SelectionView.center Radius:sqrtf(self.selectionCommitThresholdSquared)];
         pieChartTemp.dataSource = self;
         pieChartTemp.delegate = self;
         pieChartTemp.showPercentage = NO;
         pieChartTemp.userInteractionEnabled = NO;
         pieChartTemp.startPieAngle = M_PI;
+        pieChartTemp.alpha = (_shouldShowSelectionPie)?1.0f:0.0f;
         
         _pieChart = pieChartTemp;
         [self addSubview:pieChartTemp];
@@ -287,10 +286,14 @@
 
 - (CGFloat)selectionCommitThresholdSquared
 {
-    return 100.0f*100.0f;
+    return _selectionCommitThresholdSquared;
 }
 
-
+- (void)setSelectionCommitThresholdSquared:(CGFloat)selectionCommitThresholdSquared
+{
+    _selectionCommitThresholdSquared = selectionCommitThresholdSquared;
+    self.pieChart.pieRadius = sqrtf(_selectionCommitThresholdSquared);
+}
 
 - (void)setShouldWrap:(BOOL)shouldWrap
 {
