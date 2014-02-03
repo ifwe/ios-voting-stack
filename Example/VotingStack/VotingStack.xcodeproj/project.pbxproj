@@ -7,10 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7C3C6A77189C2F4D004770E0 /* CGPointExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3C6A6E189C2F4D004770E0 /* CGPointExtension.m */; };
-		7C3C6A78189C2F4D004770E0 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3C6A71189C2F4D004770E0 /* iCarousel.m */; };
-		7C3C6A79189C2F4D004770E0 /* VotingStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3C6A73189C2F4D004770E0 /* VotingStackView.m */; };
-		7C3C6A7A189C2F4D004770E0 /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C3C6A76189C2F4D004770E0 /* XYPieChart.m */; };
 		7C688FA81884C64F006B576D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C688FA71884C64F006B576D /* Foundation.framework */; };
 		7C688FAA1884C64F006B576D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C688FA91884C64F006B576D /* CoreGraphics.framework */; };
 		7C688FAC1884C64F006B576D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7C688FAB1884C64F006B576D /* UIKit.framework */; };
@@ -22,6 +18,10 @@
 		7C688FC11884C64F006B576D /* VSViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C688FC01884C64F006B576D /* VSViewController.m */; };
 		7C688FC31884C64F006B576D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7C688FC21884C64F006B576D /* Images.xcassets */; };
 		7C688FE51885B3C7006B576D /* img 0.png in Resources */ = {isa = PBXBuildFile; fileRef = 7C688FE41885B3C7006B576D /* img 0.png */; };
+		7C855AAA18A01C0700FE0CFA /* CGPointExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C855AA118A01C0700FE0CFA /* CGPointExtension.m */; };
+		7C855AAB18A01C0700FE0CFA /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C855AA418A01C0700FE0CFA /* iCarousel.m */; };
+		7C855AAC18A01C0700FE0CFA /* VotingStackView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C855AA618A01C0700FE0CFA /* VotingStackView.m */; };
+		7C855AAD18A01C0700FE0CFA /* XYPieChart.m in Sources */ = {isa = PBXBuildFile; fileRef = 7C855AA918A01C0700FE0CFA /* XYPieChart.m */; };
 		7CB7BAB6188F3B14004EBC62 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7CB7BAB5188F3B14004EBC62 /* CoreMotion.framework */; };
 		7CC46D1218889117006E2AA8 /* img 12.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CC46D0C18889117006E2AA8 /* img 12.png */; };
 		7CC46D1318889117006E2AA8 /* img 8.png in Resources */ = {isa = PBXBuildFile; fileRef = 7CC46D0D18889117006E2AA8 /* img 8.png */; };
@@ -39,14 +39,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		7C3C6A6D189C2F4D004770E0 /* CGPointExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CGPointExtension.h; sourceTree = "<group>"; };
-		7C3C6A6E189C2F4D004770E0 /* CGPointExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CGPointExtension.m; sourceTree = "<group>"; };
-		7C3C6A70189C2F4D004770E0 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
-		7C3C6A71189C2F4D004770E0 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
-		7C3C6A72189C2F4D004770E0 /* VotingStackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VotingStackView.h; sourceTree = "<group>"; };
-		7C3C6A73189C2F4D004770E0 /* VotingStackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VotingStackView.m; sourceTree = "<group>"; };
-		7C3C6A75189C2F4D004770E0 /* XYPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XYPieChart.h; sourceTree = "<group>"; };
-		7C3C6A76189C2F4D004770E0 /* XYPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XYPieChart.m; sourceTree = "<group>"; };
 		7C688FA41884C64F006B576D /* VotingStack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VotingStack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7C688FA71884C64F006B576D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		7C688FA91884C64F006B576D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -64,6 +56,14 @@
 		7C688FC21884C64F006B576D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = VotingStack/Images.xcassets; sourceTree = "<group>"; };
 		7C688FC91884C64F006B576D /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 		7C688FE41885B3C7006B576D /* img 0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img 0.png"; sourceTree = "<group>"; };
+		7C855AA018A01C0700FE0CFA /* CGPointExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CGPointExtension.h; path = ../../iosVotingStack/CGPointExtension/CGPointExtension.h; sourceTree = SOURCE_ROOT; };
+		7C855AA118A01C0700FE0CFA /* CGPointExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CGPointExtension.m; path = ../../iosVotingStack/CGPointExtension/CGPointExtension.m; sourceTree = SOURCE_ROOT; };
+		7C855AA318A01C0700FE0CFA /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = iCarousel.h; path = ../../iosVotingStack/iCarousel/iCarousel.h; sourceTree = SOURCE_ROOT; };
+		7C855AA418A01C0700FE0CFA /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = iCarousel.m; path = ../../iosVotingStack/iCarousel/iCarousel.m; sourceTree = SOURCE_ROOT; };
+		7C855AA518A01C0700FE0CFA /* VotingStackView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = VotingStackView.h; path = ../../iosVotingStack/VotingStackView.h; sourceTree = SOURCE_ROOT; };
+		7C855AA618A01C0700FE0CFA /* VotingStackView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = VotingStackView.m; path = ../../iosVotingStack/VotingStackView.m; sourceTree = SOURCE_ROOT; };
+		7C855AA818A01C0700FE0CFA /* XYPieChart.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = XYPieChart.h; path = ../../iosVotingStack/XYPieChart/XYPieChart.h; sourceTree = SOURCE_ROOT; };
+		7C855AA918A01C0700FE0CFA /* XYPieChart.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = XYPieChart.m; path = ../../iosVotingStack/XYPieChart/XYPieChart.m; sourceTree = SOURCE_ROOT; };
 		7CB7BAB5188F3B14004EBC62 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		7CC46D0C18889117006E2AA8 /* img 12.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img 12.png"; sourceTree = "<group>"; };
 		7CC46D0D18889117006E2AA8 /* img 8.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "img 8.png"; sourceTree = "<group>"; };
@@ -100,50 +100,10 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7C3C6A6B189C2F4D004770E0 /* library */ = {
-			isa = PBXGroup;
-			children = (
-				7C3C6A6C189C2F4D004770E0 /* CGPointExtension */,
-				7C3C6A6F189C2F4D004770E0 /* iCarousel */,
-				7C3C6A72189C2F4D004770E0 /* VotingStackView.h */,
-				7C3C6A73189C2F4D004770E0 /* VotingStackView.m */,
-				7C3C6A74189C2F4D004770E0 /* XYPieChart */,
-			);
-			name = library;
-			path = ../../../../Desktop/testFrameWork/iosVotingStack/library;
-			sourceTree = "<group>";
-		};
-		7C3C6A6C189C2F4D004770E0 /* CGPointExtension */ = {
-			isa = PBXGroup;
-			children = (
-				7C3C6A6D189C2F4D004770E0 /* CGPointExtension.h */,
-				7C3C6A6E189C2F4D004770E0 /* CGPointExtension.m */,
-			);
-			path = CGPointExtension;
-			sourceTree = "<group>";
-		};
-		7C3C6A6F189C2F4D004770E0 /* iCarousel */ = {
-			isa = PBXGroup;
-			children = (
-				7C3C6A70189C2F4D004770E0 /* iCarousel.h */,
-				7C3C6A71189C2F4D004770E0 /* iCarousel.m */,
-			);
-			path = iCarousel;
-			sourceTree = "<group>";
-		};
-		7C3C6A74189C2F4D004770E0 /* XYPieChart */ = {
-			isa = PBXGroup;
-			children = (
-				7C3C6A75189C2F4D004770E0 /* XYPieChart.h */,
-				7C3C6A76189C2F4D004770E0 /* XYPieChart.m */,
-			);
-			path = XYPieChart;
-			sourceTree = "<group>";
-		};
 		7C688F9B1884C64F006B576D = {
 			isa = PBXGroup;
 			children = (
-				7C3C6A6B189C2F4D004770E0 /* library */,
+				7C855A9E18A01C0700FE0CFA /* iosVotingStack */,
 				7CC6235E189334450040624C /* Documention */,
 				7C688FDF1884C69B006B576D /* DevelopmentFiles */,
 				7CD4036E1896DD4100CA37DB /* votingStackView */,
@@ -211,6 +171,46 @@
 				7C688FAE1884C64F006B576D /* Supporting Files */,
 			);
 			name = DevelopmentFiles;
+			sourceTree = "<group>";
+		};
+		7C855A9E18A01C0700FE0CFA /* iosVotingStack */ = {
+			isa = PBXGroup;
+			children = (
+				7C855A9F18A01C0700FE0CFA /* CGPointExtension */,
+				7C855AA218A01C0700FE0CFA /* iCarousel */,
+				7C855AA518A01C0700FE0CFA /* VotingStackView.h */,
+				7C855AA618A01C0700FE0CFA /* VotingStackView.m */,
+				7C855AA718A01C0700FE0CFA /* XYPieChart */,
+			);
+			name = iosVotingStack;
+			path = ../../iosVotingStack;
+			sourceTree = "<group>";
+		};
+		7C855A9F18A01C0700FE0CFA /* CGPointExtension */ = {
+			isa = PBXGroup;
+			children = (
+				7C855AA018A01C0700FE0CFA /* CGPointExtension.h */,
+				7C855AA118A01C0700FE0CFA /* CGPointExtension.m */,
+			);
+			path = CGPointExtension;
+			sourceTree = "<group>";
+		};
+		7C855AA218A01C0700FE0CFA /* iCarousel */ = {
+			isa = PBXGroup;
+			children = (
+				7C855AA318A01C0700FE0CFA /* iCarousel.h */,
+				7C855AA418A01C0700FE0CFA /* iCarousel.m */,
+			);
+			path = iCarousel;
+			sourceTree = "<group>";
+		};
+		7C855AA718A01C0700FE0CFA /* XYPieChart */ = {
+			isa = PBXGroup;
+			children = (
+				7C855AA818A01C0700FE0CFA /* XYPieChart.h */,
+				7C855AA918A01C0700FE0CFA /* XYPieChart.m */,
+			);
+			path = XYPieChart;
 			sourceTree = "<group>";
 		};
 		7CC6235E189334450040624C /* Documention */ = {
@@ -320,11 +320,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				7C688FC11884C64F006B576D /* VSViewController.m in Sources */,
-				7C3C6A78189C2F4D004770E0 /* iCarousel.m in Sources */,
-				7C3C6A79189C2F4D004770E0 /* VotingStackView.m in Sources */,
+				7C855AAB18A01C0700FE0CFA /* iCarousel.m in Sources */,
+				7C855AAC18A01C0700FE0CFA /* VotingStackView.m in Sources */,
 				7C688FB41884C64F006B576D /* main.m in Sources */,
-				7C3C6A77189C2F4D004770E0 /* CGPointExtension.m in Sources */,
-				7C3C6A7A189C2F4D004770E0 /* XYPieChart.m in Sources */,
+				7C855AAA18A01C0700FE0CFA /* CGPointExtension.m in Sources */,
+				7C855AAD18A01C0700FE0CFA /* XYPieChart.m in Sources */,
 				7C688FB81884C64F006B576D /* VSAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
