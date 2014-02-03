@@ -83,6 +83,8 @@
 
 @property (nonatomic) CGFloat animationInterval;
 
+@property (nonatomic) CGFloat currentAnimationMovementChangeRate;
+
 - (void) popFront;
 
 - (void) reloadData;

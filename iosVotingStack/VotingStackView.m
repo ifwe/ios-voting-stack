@@ -79,8 +79,6 @@
 
 @property (nonatomic) CGFloat currentAnimationMovementPercentage;
 
-@property (nonatomic) CGFloat currentAnimationMovementChangeRate;
-
 
 @end
 
