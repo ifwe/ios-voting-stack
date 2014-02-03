@@ -37,6 +37,9 @@
 - (void) votingStack:(VotingStackView *) vsView didSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex{}
 
 
+
+- (void) votingStack: (VotingStackView *) vsView viewDidBecomeSelectable:(UIView *) selectableView atIndex: (NSUInteger) itemIndex{};
+
 - (CGFloat) votingStackTiltOption{return 0.6f;}
 
 - (CGFloat) votingStackSpacingOption{return 0.2f;}
@@ -237,6 +240,10 @@
 {
     UIView * topView = [self.carousel itemViewAtIndex:self.carousel.currentItemIndex];
     
+    if (!topView) {
+        return;
+    }
+    
     topView.frame = [topView convertRect:topView.frame toView:self.SelectionView];
     
     topView.layer.opacity = 1.0f;
@@ -247,6 +254,8 @@
     self.oldCarouselContainerView = topView.superview;
     
     [self.SelectionView addSubview:topView];
+    
+    [self.delegate votingStack:self viewDidBecomeSelectable:topView atIndex:self.carousel.currentItemIndex];
 }
 
 - (void) restoreTopMostViewFromCarousel
