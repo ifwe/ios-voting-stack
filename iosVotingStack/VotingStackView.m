@@ -89,9 +89,9 @@
 @implementation VotingStackView
 @synthesize selectionCommitThresholdSquared = _selectionCommitThresholdSquared;
 
+static dispatch_once_t onceToken;
 - (void) setup
 {
-    static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         iCarousel * car = [[iCarousel alloc] initWithFrame:self.bounds];
         car.type = iCarouselTypeInvertedTimeMachine;
@@ -142,7 +142,7 @@
 
 - (void) cleanUp
 {
-    
+    onceToken = 0;
 }
 
 
