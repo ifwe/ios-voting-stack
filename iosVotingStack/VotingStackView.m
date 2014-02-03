@@ -430,7 +430,7 @@
 #pragma mark - UIPanGestureRecognizer
 
 
-- (void)userCurrentItemSelection:(CGPoint)dxPointFromOrigin locationOnScreen:(CGPoint)locationOnScreen currentState:(UIGestureRecognizerState)currentState
+- (void)userCurrentItemSelection:(CGPoint)dxPointFromOrigin locationOnScreen:(CGPoint)locationOnScreen currentState:(UIGestureRecognizerState)currentState andEndOfCurrentStateBlock:(void (^)(void))callbackBlock;
 {
     //    CGPoint locationOnScreen = [panGesture locationInView:[[UIApplication sharedApplication] keyWindow]];
     
@@ -460,11 +460,13 @@
             
             [self selectionShouldCommit:(SqDistanceFromrOrigin > self.selectionCommitThresholdSquared) WithAngle:angleFromLastTouchPoint];
             
+            if (callbackBlock) callbackBlock();
         }
             break;
         case UIGestureRecognizerStateBegan:
         {
             [self shouldShowUserSelectionCategory:YES atTouchPoint:locationOnScreen];
+            if (callbackBlock) callbackBlock();
         }
             break;
         case UIGestureRecognizerStateFailed:
@@ -478,13 +480,14 @@
             CATransform3D offStageTransformation = [self offStageTransformation:offStagePoint forAngle:(self.currentSelection<0)?-1.0f:angleFromLastTouchPoint];
             //[self offStageTransformation:offStagePoint andCurrentSelection:self.currentSelection withCurrentTransformation:[self currentSelectedView].layer.transform];
             
-            [UIView animateWithDuration:0.5f animations:^{
+            [UIView animateWithDuration:0.3f animations:^{
                 [self currentSelectedView].layer.transform = offStageTransformation;
             } completion:^(BOOL finished) {
                 [self currentSelectedView].layer.transform = CATransform3DIdentity;
                 [self.delegate votingStack:self didSelectChoiceAtIndex:self.currentSelection
                                    atIndex:self.carousel.currentItemIndex];
                 
+                if (callbackBlock) callbackBlock();
             }];
             
             
@@ -505,7 +508,7 @@
     
     UIGestureRecognizerState currentState = panGesture.state;
     
-    [self userCurrentItemSelection:dxPointFromOrigin locationOnScreen:locationOnScreen currentState:currentState];
+    [self userCurrentItemSelection:dxPointFromOrigin locationOnScreen:locationOnScreen currentState:currentState andEndOfCurrentStateBlock:nil];
 }
 
 
@@ -522,6 +525,25 @@
 
 - (void) animatedPanFrom: (CGPoint) fromLocation to: (CGPoint) toLocation
 {
+    if (self.SelectionView.subviews.count == 0) {
+        return;
+    }
+    
+    if (self.currentAnimationMovementState != UIGestureRecognizerStateFailed &&
+         CGPointEqualToPoint(fromLocation, CGPointZero)
+        && CGPointEqualToPoint(toLocation, CGPointZero)) {
+        
+        // animated movement in process
+    } else if (self.currentAnimationMovementState == UIGestureRecognizerStateFailed){
+        
+        // ready for another animation
+    }else {
+        // other wise anything will be ignored.
+        
+        return;
+    }
+    
+    
     switch (self.currentAnimationMovementState) {
         case UIGestureRecognizerStateFailed:
         {
@@ -559,13 +581,6 @@
             break;
         default: //UIGestureRecognizerStateEnded or others
         {
-            self.currentAnimationMovementState = UIGestureRecognizerStateFailed;
-            _isAnimatedMovement = NO;
-            
-            [self setUserTouchInputDisable:NO];
-            self.currentAnimationMovementStartPoint = CGPointZero;
-            self.currentAnimationMovementEndPoint = CGPointZero;
-            self.currentAnimationMovementPercentage = 0.0f;
             
         }
             return; // END STATE
@@ -581,13 +596,28 @@
     
     CGPoint locationOnScreen = CGPointAdd(self.currentAnimationMovementStartPoint, tMultBMinusA);
     
-    [self userCurrentItemSelection:dxPointFromOrigin locationOnScreen:locationOnScreen currentState:self.currentAnimationMovementState];
+    __weak VotingStackView * weakSelf = self;
     
-    double delayInSeconds = self.animationInterval;
-    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-        [self animatedPanFrom:self.currentAnimationMovementStartPoint to:self.currentAnimationMovementEndPoint];
-    });
+    [self userCurrentItemSelection:dxPointFromOrigin locationOnScreen:locationOnScreen currentState:self.currentAnimationMovementState andEndOfCurrentStateBlock:^{
+        double delayInSeconds = weakSelf.animationInterval;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            
+            if (self.currentAnimationMovementState == UIGestureRecognizerStateEnded){
+                self.currentAnimationMovementState = UIGestureRecognizerStateFailed;
+                _isAnimatedMovement = NO;
+                
+                
+                [self setUserTouchInputDisable:NO];
+                
+                self.currentAnimationMovementStartPoint = CGPointZero;
+                self.currentAnimationMovementEndPoint = CGPointZero;
+                self.currentAnimationMovementPercentage = 0.0f;
+            }
+            [weakSelf animatedPanFrom:CGPointZero to:CGPointZero];
+        });
+        
+    }];
     
 }
 
