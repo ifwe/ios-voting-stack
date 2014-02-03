@@ -60,6 +60,8 @@
 
 @property (nonatomic, weak) XYPieChart *pieChart;
 
+@property (nonatomic) CGFloat selectionCommitThresholdSquared;
+
 @property (nonatomic) BOOL shouldLoadUserSelectionData;
 
 @property (nonatomic, weak) UIView *currentSelectionView;
@@ -128,6 +130,7 @@
         _disableUserTouchView.userInteractionEnabled = NO;
         
         _isAnimatedMovement = NO;
+        _animationInterval = 0.008;
         _currentAnimationMovementState = UIGestureRecognizerStateFailed;
         _currentAnimationMovementChangeRate = 0.01f;
         _currentAnimationMovementStartPoint = CGPointZero;
@@ -293,6 +296,17 @@
 {
     _selectionCommitThresholdSquared = selectionCommitThresholdSquared;
     self.pieChart.pieRadius = sqrtf(_selectionCommitThresholdSquared);
+}
+
+
+- (CGFloat)selectionCommitThreshold
+{
+    return sqrtf(_selectionCommitThresholdSquared);
+}
+
+- (void)setSelectionCommitThreshold:(CGFloat)selectionCommitThreshold
+{
+    [self setSelectionCommitThresholdSquared:selectionCommitThreshold * selectionCommitThreshold];
 }
 
 - (void)setShouldWrap:(BOOL)shouldWrap
@@ -569,7 +583,7 @@
     
     [self userCurrentItemSelection:dxPointFromOrigin locationOnScreen:locationOnScreen currentState:self.currentAnimationMovementState];
     
-    double delayInSeconds = 0.008;
+    double delayInSeconds = self.animationInterval;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
         [self animatedPanFrom:self.currentAnimationMovementStartPoint to:self.currentAnimationMovementEndPoint];

@@ -71,8 +71,7 @@
 
 @property (nonatomic, weak) IBOutlet id<VotingStackViewDelegate> delegate;
 
-// the radius of the pie, squared.
-@property (nonatomic) CGFloat selectionCommitThresholdSquared;
+@property (nonatomic) CGFloat selectionCommitThreshold; // also controls the radius of the selection pie
 
 @property (nonatomic) BOOL shouldWrap;
 
@@ -81,6 +80,8 @@
 @property (nonatomic, readonly) UIView *currentSelectionView;
 
 @property (nonatomic, readonly) BOOL isAnimatedMovement;
+
+@property (nonatomic) CGFloat animationInterval;
 
 - (void) popFront;
 

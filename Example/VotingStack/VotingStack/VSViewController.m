@@ -33,7 +33,7 @@
     [super viewDidLoad];
     self.voteView.backgroundColor = [UIColor grayColor];
     self.shouldDisablePopup = NO;
-    self.voteView.selectionCommitThresholdSquared = 30.0f * 30.0f;
+    self.voteView.selectionCommitThreshold = 30.0f;
     self.voteView.shouldShowSelectionPie = YES;
 	// Do any additional setup after loading the view, typically from a nib.
 }
