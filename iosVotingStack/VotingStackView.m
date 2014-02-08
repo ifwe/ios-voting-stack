@@ -278,7 +278,7 @@ static dispatch_once_t onceToken;
     if (angle < 0) {
         return CATransform3DIdentity;
     }
-    CGPoint offStagePoint = CGPointMake(releasePoint.x*3.0f, releasePoint.y*3.0f);
+    CGPoint offStagePoint = CGPointMake(releasePoint.x*8.0f, releasePoint.y*8.0f);
     
     CATransform3D translateRotation = CATransform3DMakeTranslation(offStagePoint.x, offStagePoint.y, 0.0f);
     translateRotation = CATransform3DRotate(translateRotation, angle, 0, 0, 1);
