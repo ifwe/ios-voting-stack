@@ -2,7 +2,7 @@ Purpose
 ========
 Voting Stack View is an simple and easy-to-use selection visual representation. It takes advantage of iCarousel and XYPieChart to give the world class animation.
 
-[Demo](https://s3.amazonaws.com/uploads.hipchat.com/30/602337/hCHDPFvF8scRG2H/selection.gif)
+![Demo](https://s3.amazonaws.com/uploads.hipchat.com/30/602337/hCHDPFvF8scRG2H/selection.gif)
 
 
 Example
