@@ -31,13 +31,11 @@
                       saturation:topNum/randomBase
                       brightness:topNum/randomBase
                            alpha:0.5];
-};
+}
 
 - (void) votingStack:(VotingStackView *) vsView willSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex{}
 - (void) votingStack:(VotingStackView *) vsView didSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex{}
-
-
-
+- (void) votingStack:(VotingStackView *)vsView didTapOnItemAtIndex:(NSUInteger)itemIndex{}
 - (void) votingStack: (VotingStackView *) vsView viewDidBecomeSelectable:(UIView *) selectableView atIndex: (NSUInteger) itemIndex{};
 
 - (CGFloat) votingStackTiltOption{return 0.6f;}
@@ -60,6 +58,8 @@
 @property (nonatomic, weak) UIView *SelectionView;
 
 @property (nonatomic, strong) UIPanGestureRecognizer *panGesture;
+
+@property (nonatomic, strong) UITapGestureRecognizer *tapGesture;
 
 @property (nonatomic, weak) XYPieChart *pieChart;
 
@@ -111,6 +111,8 @@ static dispatch_once_t onceToken;
         [self addSubview:_SelectionView];
         
         _panGesture = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(pan:)];
+        
+        _tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap:)];
         
         XYPieChart *pieChartTemp = [[XYPieChart alloc] initWithFrame:_SelectionView.frame Center:_SelectionView.center Radius:sqrtf(self.selectionCommitThresholdSquared)];
         pieChartTemp.dataSource = self;
@@ -250,6 +252,7 @@ static dispatch_once_t onceToken;
     topView.userInteractionEnabled = YES;
     
     [topView addGestureRecognizer:self.panGesture];
+    [topView addGestureRecognizer:self.tapGesture];
     
     self.oldCarouselContainerView = topView.superview;
     
@@ -264,6 +267,8 @@ static dispatch_once_t onceToken;
         UIView * view = [self currentSelectedView];
         
         [view removeGestureRecognizer:self.panGesture];
+        [view removeGestureRecognizer:self.tapGesture];
+        
         view.layer.opacity = 0.0f;
         view.frame = view.bounds;
         [view removeFromSuperview];
@@ -425,7 +430,7 @@ static dispatch_once_t onceToken;
 
 - (NSString *)pieChart:(XYPieChart *)pieChart textForSliceAtIndex:(NSUInteger)index{
     return [self.delegate votingstack:self textForSliceAtIndex:index atIndex:self.carousel.currentItemIndex];
-
+    
 }
 
 
@@ -521,13 +526,13 @@ static dispatch_once_t onceToken;
 
 /*
  DFA for animated pan:
- [UIGestureRecognizerStateFailed]                           -> [UIGestureRecognizerStateBegan]      ; disable user touch & update start & 
-                                                                                                    ; end point & percentage = 0.0f & isAnimatedMovement = YES
+ [UIGestureRecognizerStateFailed]                           -> [UIGestureRecognizerStateBegan]      ; disable user touch & update start &
+ ; end point & percentage = 0.0f & isAnimatedMovement = YES
  [UIGestureRecognizerStateBegan]                            -> [UIGestureRecognizerStateChanged]    ; percentage += changeRate
  [UIGestureRecognizerStateChanged]                          -> [UIGestureRecognizerStateChanged]    ; percentage += changeRate
  [percentage >= 100.0f && UIGestureRecognizerStateChanged]  -> [UIGestureRecognizerStateEnded]
- [UIGestureRecognizerStateEnded][END STATE]                 -> [UIGestureRecognizerStateFailed]     ; enable user touch & start & end point & percentage = 0.0f 
-                                                                                                    ; isAnimatedMovement = NO
+ [UIGestureRecognizerStateEnded][END STATE]                 -> [UIGestureRecognizerStateFailed]     ; enable user touch & start & end point & percentage = 0.0f
+ ; isAnimatedMovement = NO
  */
 
 - (void) animatedPanFrom: (CGPoint) fromLocation to: (CGPoint) toLocation
@@ -537,7 +542,7 @@ static dispatch_once_t onceToken;
     }
     
     if (self.currentAnimationMovementState != UIGestureRecognizerStateFailed &&
-         CGPointEqualToPoint(fromLocation, CGPointZero)
+        CGPointEqualToPoint(fromLocation, CGPointZero)
         && CGPointEqualToPoint(toLocation, CGPointZero)) {
         
         // animated movement in process
@@ -597,7 +602,7 @@ static dispatch_once_t onceToken;
     // using line equation: L(t) = A + t(B-A)
     
     CGPoint tMultBMinusA = CGPointMult(CGPointSub(self.currentAnimationMovementEndPoint, self.currentAnimationMovementStartPoint),
-                                                    self.currentAnimationMovementPercentage);
+                                       self.currentAnimationMovementPercentage);
     
     CGPoint dxPointFromOrigin = tMultBMinusA;
     
@@ -628,5 +633,8 @@ static dispatch_once_t onceToken;
     
 }
 
-
+#pragma mark - UITapGestureRecognizer
+- (void) tap:(UITapGestureRecognizer *) panGesture {
+    [self.delegate votingStack:self didTapOnItemAtIndex:self.carousel.currentItemIndex];
+}
 @end

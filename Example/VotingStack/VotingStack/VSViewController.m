@@ -166,22 +166,22 @@
 
 
 - (UIColor *)votingstack:(VotingStackView *)vsView colorForSliceAtIndex:(NSUInteger)index atIndex: (NSUInteger) itemIndex{
-        NSArray * arrColor = [NSArray arrayWithObjects:
-         [UIColor colorWithRed:246/255.0 green:155/255.0 blue:0/255.0 alpha:0.5f],
-         [UIColor colorWithRed:129/255.0 green:195/255.0 blue:29/255.0 alpha:0.5f],
-         [UIColor colorWithRed:62/255.0 green:173/255.0 blue:219/255.0 alpha:0.5f],
-         [UIColor colorWithRed:229/255.0 green:66/255.0 blue:115/255.0 alpha:0.5f],
-                              [UIColor colorWithRed:148/255.0 green:141/255.0 blue:139/255.0 alpha:0.5f],nil];
-        return [arrColor objectAtIndex:(index % arrColor.count)];
+    NSArray * arrColor = [NSArray arrayWithObjects:
+                          [UIColor colorWithRed:246/255.0 green:155/255.0 blue:0/255.0 alpha:0.5f],
+                          [UIColor colorWithRed:129/255.0 green:195/255.0 blue:29/255.0 alpha:0.5f],
+                          [UIColor colorWithRed:62/255.0 green:173/255.0 blue:219/255.0 alpha:0.5f],
+                          [UIColor colorWithRed:229/255.0 green:66/255.0 blue:115/255.0 alpha:0.5f],
+                          [UIColor colorWithRed:148/255.0 green:141/255.0 blue:139/255.0 alpha:0.5f],nil];
+    return [arrColor objectAtIndex:(index % arrColor.count)];
 }
 
 
 
 - (void) votingStack:(VotingStackView *) vsView willSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex{
-//    NSLog(@"%@, %d", NSStringFromSelector(_cmd), index);
+    //    NSLog(@"%@, %d", NSStringFromSelector(_cmd), index);
     
     
-    self.selectionIndex.text = [NSString stringWithFormat:@"%d", index];
+    self.selectionIndex.text = [NSString stringWithFormat:@"%ld", (long)index];
     self.currentSelectionCategory.text = (index <0)?@"Cancel":self.arrayOfString[index%self.arrayOfString.count];
     
     UILabel * label = (UILabel *)[self.voteView.currentSelectionView viewWithTag:MAGIC_TAG];
@@ -201,7 +201,7 @@
 }
 
 - (void) votingStack:(VotingStackView *) vsView didSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex{
-//    NSLog(@"%@, %d", NSStringFromSelector(_cmd), index);
+    //    NSLog(@"%@, %d", NSStringFromSelector(_cmd), index);
     if (index != -1) {
         NSString * selection = [self.arrayOfString objectAtIndex:(index % self.arrayOfString.count)];
         
@@ -215,6 +215,19 @@
 
 
 
+- (void) votingStack:(VotingStackView *)vsView didTapOnItemAtIndex:(NSUInteger)itemIndex
+{
+    [[[UIAlertView alloc] initWithTitle:@"Tapped on an item" message:@"" delegate:nil cancelButtonTitle:@"ok" otherButtonTitles:nil] show];
+}
+
+
+- (CGFloat) votingStackTiltOption{
+    return 0.12f;
+}
+
+- (CGFloat) votingStackSpacingOption{
+    return 0.2f;
+}
 
 
 

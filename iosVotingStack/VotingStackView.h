@@ -94,6 +94,12 @@
 - (void) votingStack:(VotingStackView *) vsView didSelectChoiceAtIndex: (NSInteger) index atIndex: (NSUInteger) itemIndex;
 
 /*
+ * when user tap on the selectable view
+ */
+- (void) votingStack:(VotingStackView *)vsView didTapOnItemAtIndex:(NSUInteger)itemIndex;
+
+
+/*
  *  When view become selectable
  */
 - (void) votingStack: (VotingStackView *) vsView viewDidBecomeSelectable:(UIView *) selectableView atIndex: (NSUInteger) itemIndex;

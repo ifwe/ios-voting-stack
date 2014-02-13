@@ -25,9 +25,12 @@
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="hy2-Ge-mNY"/>
                                 </connections>
                             </view>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hhB-0j-rgh">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hhB-0j-rgh">
                                 <rect key="frame" x="0.0" y="436" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="KHI-zF-yxz"/>
+                                </constraints>
                                 <items>
                                     <barButtonItem title="popFront" id="m5C-71-FHW">
                                         <connections>
@@ -87,8 +90,9 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="rjH-pH-ttW" firstAttribute="top" secondItem="hfs-FJ-XR2" secondAttribute="bottom" constant="53" id="AJq-MV-7mM"/>
-                            <constraint firstItem="0hY-Xy-Pcj" firstAttribute="top" secondItem="rjH-pH-ttW" secondAttribute="bottom" constant="44" id="Iew-IW-ss1"/>
+                            <constraint firstItem="0hY-Xy-Pcj" firstAttribute="top" secondItem="rjH-pH-ttW" secondAttribute="bottom" constant="44" id="BAw-fY-ZcO"/>
+                            <constraint firstItem="rjH-pH-ttW" firstAttribute="top" secondItem="hfs-FJ-XR2" secondAttribute="bottom" constant="53" id="DgM-Ps-Xbu"/>
+                            <constraint firstItem="0hY-Xy-Pcj" firstAttribute="top" secondItem="hhB-0j-rgh" secondAttribute="bottom" id="eL5-uo-NIG"/>
                         </constraints>
                     </view>
                     <connections>
