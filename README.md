@@ -4,6 +4,11 @@ Voting Stack View is an simple and easy-to-use selection visual representation. 
 
 ![Demo](https://s3.amazonaws.com/uploads.hipchat.com/30/602337/hCHDPFvF8scRG2H/selection.gif)
 
+
+Example
+--------
+Please see the example [example] file
+
 Supported OS & SDK Versions
 -----------------------------
 
@@ -35,3 +40,9 @@ Voting Stack View require you to implement some 5 delegate method for it to be u
 
 
 
+
+
+
+
+[example]:https://github.com/tagged/ios-voting-stack/blob/master/Example/VotingStack/VotingStack/VSViewController.m#L99
+    
