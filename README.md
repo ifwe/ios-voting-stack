@@ -15,7 +15,7 @@ Here's a list of [protocols] that need to be implemented
 Supported OS & SDK Versions
 ===========================
 
-* Supported build target - iOS 6.1 (Xcode 4.6, Apple LLVM compiler 4.2)
+* Supported build target - iOS 7.0 (Xcode 5.0, Apple LLVM compiler 4.2)
 
 NOTE: 'Supported' means that the library has been tested with this version. 'Compatible' means that the library should work on this OS version (i.e. it doesn't rely on any unavailable SDK features) but is no longer being tested for compatibility and may require tweaking or bug fixes to run correctly.
 
@@ -41,18 +41,20 @@ There are two steps in the installation process:
 
 step 1:
 --------------
-**Using the framework file**:
+**Using the ``.framework`` file**:
 
+The file is located in ``Framework\`` folder. 
 To use the VotingStackView class in an app, just drag the VotingStackView class files (demo files and assets are not needed) into your project and add the QuartzCore framework.
 
 
-**Using the ``.m`` file:**
+**Using the ``*.m``&&``*.h`` file:**
 
 Copy all the content of ``iosVotingStack\`` folder into the your project
 
 
-**Using it as Sub Projects:** 
+**Using it as ``Sub Projects:``** 
 
+A create static library project is already created. And it is located in ``createStaticLibrary\`` folder. 
 Please use the [Creating a Static Library in iOS Tutorial] article's `Method 2: Subprojects` section for detail.
 
 
