@@ -67,7 +67,7 @@
 
 @property (nonatomic) BOOL shouldLoadUserSelectionData;
 
-@property (nonatomic, weak) UIView *currentSelectionView;
+@property (nonatomic) UIView *currentSelectionView;
 
 @property (nonatomic, weak) UIView *disableUserTouchView;
 

@@ -266,7 +266,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = VS;
-				LastUpgradeCheck = 0500;
+				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = Tagged;
 			};
 			buildConfigurationList = 7C688F9F1884C64F006B576D /* Build configuration list for PBXProject "VotingStack" */;
@@ -373,7 +373,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -413,7 +412,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD_INCLUDING_64_BIT)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -448,11 +446,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/ydai/Desktop,
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/iosVotingStack-fcsrbbbwdmhzewdjafrvfbzuxfhk/Build/Intermediates/ArchiveIntermediates/iosVotingStack/IntermediateBuildFilesPath/UninstalledProducts",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VotingStack/VotingStack-Prefix.pch";
 				INFOPLIST_FILE = "VotingStack/VotingStack-Info.plist";
@@ -468,11 +461,6 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(inherited)",
-					/Users/ydai/Desktop,
-					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/iosVotingStack-fcsrbbbwdmhzewdjafrvfbzuxfhk/Build/Intermediates/ArchiveIntermediates/iosVotingStack/IntermediateBuildFilesPath/UninstalledProducts",
-				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "VotingStack/VotingStack-Prefix.pch";
 				INFOPLIST_FILE = "VotingStack/VotingStack-Info.plist";
