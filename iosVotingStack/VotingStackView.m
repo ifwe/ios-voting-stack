@@ -176,9 +176,15 @@ static dispatch_once_t onceToken;
 
 - (void)reloadData
 {
-    [self restoreTopMostViewFromCarousel];
-    [self.carousel reloadData];
-    [self borrowTopMostViewFromCarousel];
+    if (self.currentAnimationMovementState != UIGestureRecognizerStateFailed) {
+        // TODO: Look for a better mechanism to guard against race condition
+        return; // Not a good time now. Voting in progress with animation pending.
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self restoreTopMostViewFromCarousel];
+        [self.carousel reloadData];
+        [self borrowTopMostViewFromCarousel];
+    });
 }
 
 
@@ -191,8 +197,10 @@ static dispatch_once_t onceToken;
 
 - (UIView *) currentSelectedView {
     NSArray * arrayOfSelectionView = [self.SelectionView subviews];
-    assert([arrayOfSelectionView count] != 0);
-    return [arrayOfSelectionView lastObject];
+    if ([arrayOfSelectionView count]) {
+        return [arrayOfSelectionView lastObject];
+    }
+    return nil;
 }
 
 
@@ -248,6 +256,7 @@ static dispatch_once_t onceToken;
     
     topView.frame = [topView convertRect:topView.frame toView:self.SelectionView];
     
+    topView.layer.transform = CATransform3DIdentity;
     topView.layer.opacity = 1.0f;
     topView.userInteractionEnabled = YES;
     
@@ -487,22 +496,24 @@ static dispatch_once_t onceToken;
         {
             [self shouldShowUserSelectionCategory:NO atTouchPoint:locationOnScreen];
             
-            
+            // Calculate the transformation matrix
             CGPoint offStagePoint = CGPointMake(dxPointFromOrigin.x, dxPointFromOrigin.y+halfSelectionViewHeight);
             CATransform3D offStageTransformation = [self offStageTransformation:offStagePoint forAngle:(self.currentSelection<0)?-1.0f:angleFromLastTouchPoint];
-            //[self offStageTransformation:offStagePoint andCurrentSelection:self.currentSelection withCurrentTransformation:[self currentSelectedView].layer.transform];
             
-            [UIView animateWithDuration:0.3f animations:^{
-                [self currentSelectedView].layer.transform = offStageTransformation;
-            } completion:^(BOOL finished) {
-                [self currentSelectedView].layer.transform = CATransform3DIdentity;
-                [self.delegate votingStack:self didSelectChoiceAtIndex:self.currentSelection
-                                   atIndex:self.carousel.currentItemIndex];
-                
-                if (callbackBlock) callbackBlock();
-            }];
-            
-            
+            // Animate the voting action
+            // Take a snapshot of the current view as it might change in the interim while animating if the collection refreshes.
+            UIView *currentView = [self currentSelectedView];
+            if (currentView) {
+                [UIView animateWithDuration:0.3f animations:^{
+                    currentView.layer.transform = offStageTransformation;
+                } completion:^(BOOL finished) {
+                    currentView.layer.transform = CATransform3DIdentity;
+                    // Call the voting action callback before animation starts
+                    [self.delegate votingStack:self didSelectChoiceAtIndex:self.currentSelection
+                                       atIndex:self.carousel.currentItemIndex];
+                    if (callbackBlock) callbackBlock();
+                }];
+            }
         }
             break;
         default:
